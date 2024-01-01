@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+.background {
+  background-color: rgb(193, 246, 248);
+  margin: 10px;
+  width: 20%;
+}
+.header {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
