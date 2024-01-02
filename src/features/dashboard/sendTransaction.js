@@ -7,6 +7,7 @@ import OsloBtn from "./osloBtn";
 
 export default function SendTransaction() {
   const [success, setSuccess] = useState(false);
+  const [activeBtn, setActiveBtn] = useState("send");
   const lableInput = ({ label, name, value, placeholder, type, options }) => {
     return (
       <div className="mt-3">
@@ -54,7 +55,7 @@ export default function SendTransaction() {
                     <i class="bi bi-arrow-down-left-square-fill"></i>
                   </div>
                 </div> */}
-                <OsloBtn />
+                <OsloBtn activeBtn={activeBtn} setActiveBtn={btn => setActiveBtn(btn)} />
                 <div className="mt-4 mb-2">
                   {lableInput({
                     label: "Send from",

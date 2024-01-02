@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import OsloBtn from "./osloBtn";
 
 export default function SendTransaction() {
+  const [activeBtn, setActiveBtn] = useState("send");
   const inputField = ({ name, value, placeholder, type, options }) => {
     return (
       <>
@@ -73,7 +74,7 @@ export default function SendTransaction() {
           </div>
           <div className="oslo-card mt-3">
             <div className="d-flex justify-content-center">
-              <OsloBtn />
+              <OsloBtn activeBtn={activeBtn} setActiveBtn={btn => setActiveBtn(btn)} />
             </div>
             <div className="d-flex p-4 justify-content-between">
               {inputField({
