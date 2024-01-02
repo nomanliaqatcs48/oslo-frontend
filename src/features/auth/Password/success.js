@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import LightCheck from "../../../assets/light-check.png";
 import Button from "../../../components/Button"
 
 export default function Success() {
+  const navigate = useNavigate()
   return (
     <div>
       <div className="text-center">
@@ -30,7 +32,7 @@ export default function Success() {
         </p>
         <div className="row justify-content-center mt-5">
             <div className="col-12 col-md-20 col-lg-8">
-              <Button label="Continue" />
+              <Button label="Continue" onClick={() => navigate("/dashboard")}/>
             </div>
           </div>
       </div>
