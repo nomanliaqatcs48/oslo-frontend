@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import Button from "../../../sharedComponents/Button";
+import Button from "../../../components/Button";
 
 export default function Step1({ setPageStep }) {
   return (

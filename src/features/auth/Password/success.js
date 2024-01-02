@@ -1,6 +1,6 @@
 import React from "react";
 import LightCheck from "../../../assets/light-check.png";
-import Button from "../../../sharedComponents/Button"
+import Button from "../../../components/Button"
 
 export default function Success() {
   return (

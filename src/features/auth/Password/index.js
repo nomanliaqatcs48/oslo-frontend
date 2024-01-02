@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Step from "../../../sharedComponents/Step";
+import Step from "../../../components/Step";
 import Step1 from "./step1";
 import SecureWallet from "./secureWallet";
 import SecretRecoveryPhrase from "./secretRecoveryPhrase";
@@ -29,7 +29,7 @@ export default function Password() {
   return (
     <div className="main">
       <div className="row justify-content-center">
-        <div className="col-12 col-md-10 col-lg-8">
+        <div className="col-12 col-md-10 col-lg-10">
           {[1, 2, 3, 4].includes(pageStep) && <Step pageStep={pageStep} />}
           {pageStep === 1 && <Step1 setPageStep={page => setPageStep(page)} />}
           {pageStep === 2 && <SecureWallet setPageStep={page => setPageStep(page)} />}

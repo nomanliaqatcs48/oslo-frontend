@@ -1,7 +1,7 @@
 import React from "react";
 import LightBulb from "../../../assets/bulb.svg";
 import PharseSection from "../pharseSection";
-import Button from "../../../sharedComponents/Button";
+import Button from "../../../components/Button";
 
 export default function SecretRecoveryPhrase({ pageStep, setPageStep, pharseVals }) {
   return (

@@ -1,6 +1,6 @@
 import Form from "react-bootstrap/Form";
 import LightWalletIcon from "../../assets/lightWalletIcon.png";
-import Button from "../../sharedComponents/Button";
+import Button from "../../components/Button";
 
 export default function ConnectWallet({setWalletPage}) {
   return (

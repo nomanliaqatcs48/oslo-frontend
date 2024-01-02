@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "../../sharedComponents/Button";
+import Button from "../../components/Button";
 
-export default function PharseSecton({ walletPage, pageStep, setPageStep, pharseVals }) {
+export default function PharseSecton({
+  walletPage,
+  pageStep,
+  setPageStep,
+  pharseVals,
+}) {
   const [hidePhase, setHidePharse] = useState(true);
   const [pharseValues, setPharseValues] = useState([]);
 
   useEffect(() => {
-   
-      setPharseValues(pharseVals);
-      if(walletPage === "exist"){
-        setHidePharse(false)
-      }
+    setPharseValues(pharseVals);
+    if (walletPage === "exist") {
+      setHidePharse(false);
+    }
   }, [pharseVals]);
 
   const InputField = (pharse) => {
@@ -60,9 +64,8 @@ export default function PharseSecton({ walletPage, pageStep, setPageStep, pharse
             </div>
           )}
           <div className={`${hidePhase && "alerting"} row`}>
-            {pharseValues.length > 0 && pharseValues.map((pharse, i) => (
-                InputField(pharse)
-            ))}
+            {pharseValues.length > 0 &&
+              pharseValues.map((pharse, i) => InputField(pharse))}
             {/* {InputField("value2", "muscle")}
             {InputField("value3", "jeans")}
             {InputField("value4", "match")}

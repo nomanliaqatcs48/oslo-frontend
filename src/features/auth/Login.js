@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
-import Header from "../../sharedComponents/Header";
+import Header from "../../components/Header";
 import ConnectWallet from "./ConnectWallet";
 import HelpUs from "./HelpUs";
 import Password from "./Password";
@@ -35,9 +35,9 @@ export function Login() {
 
   return (
     <div className="container-fluid p-4">
-      <Header />
+      <Header page="login" />
       <div className="centered-content row">
-        <div className="m-auto col-12 col-md-12 col-lg-7">
+        <div className="m-auto col-12 col-md-10 col-lg-6">
           {!showCreatePasswordPage && (
             <>
               {!walletPage && (
