@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "../../sharedComponents/Button";
-import randomstring from "randomstring";
 
 export default function PharseSecton({ walletPage, pageStep, setPageStep, pharseVals }) {
   const [hidePhase, setHidePharse] = useState(true);
@@ -10,16 +9,19 @@ export default function PharseSecton({ walletPage, pageStep, setPageStep, pharse
   useEffect(() => {
    
       setPharseValues(pharseVals);
+      if(walletPage === "exist"){
+        setHidePharse(false)
+      }
   }, [pharseVals]);
 
   const InputField = (pharse) => {
     return (
-      <div className="col-4 mt-3" key={pharse.id}>
+      <div className="col-4 mt-3" key={pharse?.id}>
         <Form.Control
           className="secure-input"
           type="text"
-          name={pharse.id}
-          value={pharse.value}
+          name={pharse?.id}
+          value={pharse?.value}
         />
       </div>
     );

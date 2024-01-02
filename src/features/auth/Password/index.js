@@ -6,7 +6,7 @@ import SecretRecoveryPhrase from "./secretRecoveryPhrase";
 import Step2 from "./step2";
 import PharseSecton from "../pharseSection";
 import Success from "./success";
-import randomstring from "randomstring";
+import { generate } from "random-words";
 
 export default function Password() {
   const [pageStep, setPageStep] = useState(1);
@@ -18,10 +18,7 @@ export default function Password() {
       for (let i = 1; i <= 12; i++) {
         const item = {
           id: `value-${i}`,
-          value: randomstring.generate({
-            length: 4,
-            charset: "alphabetic",
-          }),
+          value: generate({ minLength: 3, maxLength: 5 })
         };
         pharses.push(item);
       }
