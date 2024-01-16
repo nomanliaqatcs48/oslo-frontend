@@ -8,7 +8,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const CustomText = styled.p`
-color: #000;
+color: ${({ theme }) => theme.text};
 font-family: Roboto;
 font-size:  ${props => `${props.size}px` || '16px'};
 font-style: normal;

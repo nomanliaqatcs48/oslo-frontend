@@ -52,9 +52,12 @@ export default function HelpUs({ setWalletPage, setShowCreatePasswordPage }) {
         <div className="row justify-content-center">
           <div className="col-12 col-md-6 col-lg-5">
             <Button label="I Agree" onClick={setShowCreatePasswordPage} />
-            <button className="btn action-btn-secondary action-btn mt-3" onClick={setWalletPage}>
-              <span>No Thanks</span>
-            </button>
+            <Button
+              label="No Thanks"
+              className="mt-3"
+              secondary={true}
+              onClick={setWalletPage}
+            />
           </div>
         </div>
       </div>

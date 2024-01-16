@@ -11,7 +11,7 @@ export default function Step1({ setPageStep }) {
         does not have the capability to recover this password. Keep it secure
         for personalized access to your wallet.
       </p>
-      <div className="px-5 pt-3">
+      <div className="px-5 pt-3 oslo-form">
         <Form.Label className="content">Create Password</Form.Label>
         <InputGroup className="mb-4">
           <Form.Control

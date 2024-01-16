@@ -8,6 +8,7 @@ import HelpUs from "./HelpUs";
 import Password from "./Password";
 import PharseSecton from "./pharseSection";
 import { generate } from "random-words";
+import { useDarkMode } from "../../components/Theme";
 
 export function Login() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export function Login() {
   const [walletPage, setWalletPage] = useState(null);
   const [pharseValues, setPharseValues] = useState([]);
   const [showCreatePasswordPage, setShowCreatePasswordPage] = useState(false);
-
+  const [theme, toggleTheme, componentMounted] = useDarkMode();
   const {} = useSelector((state) => state.auth);
   
   useEffect(() => {

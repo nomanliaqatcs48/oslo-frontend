@@ -15,8 +15,8 @@ const CustomButton = styled.button`
   border: 1px solid #cfb577;
   outline: none;
   border-radius: 9999px;
-  background: #CFB577;
-  color: #fff;
+  background: ${props => props.secondary ? "transparent" : props.theme.primaryBtn};
+  color: ${props => props.secondary ? props.theme.text: "#FFF"};
   font-size: 1rem;
   font-style: normal;
   font-weight: 600;

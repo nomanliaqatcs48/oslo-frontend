@@ -72,7 +72,6 @@
 }
 
 .login-content {
-  color: #000;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -83,7 +82,6 @@
 }
 
 .bold-text {
-  color: #000;
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
@@ -92,7 +90,6 @@
 
 .wallet-section {
   border-radius: 16px;
-  background: #fff;
   backdrop-filter: blur(2px);
   width: 100%;
   height: auto;
@@ -109,18 +106,6 @@
   padding: 0.75rem 1rem;
 }
 
-.description {
-  color: #000;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px; /* 150% */
-}
-
-.description a {
-  color: var(--light-blue);
-}
-
 .action-btn {
   /* display: flex; */
   padding: 9px 0px;
@@ -134,13 +119,11 @@
 .action-btn-primary {
   border-radius: 9999px;
   background: #cfb577;
-  color: #fff !important;
 }
 
 .action-btn-secondary {
   border-radius: 9999px;
   border: 1px solid #cfb577 !important;
-  color: #000;
 }
 
 .wallet-btn span {
@@ -155,10 +138,8 @@
   gap: 30px;
   border-radius: 16px;
   border: 1px solid #bbb4a4;
-  background: #fff;
 }
 .title {
-  color: #000;
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
@@ -166,7 +147,6 @@
 }
 
 .content {
-  color: #000;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -203,18 +183,6 @@
   height: 2px;
   background: var(--light-gray);
   margin-top: 1.4rem;
-}
-
-.active-step {
-  background: #cfb577;
-}
-
-.inactive-step {
-  background: #f3ecdd;
-}
-
-.complete-step {
-  background: #00cc39;
 }
 
 .password-section-p {
@@ -287,13 +255,6 @@
   );
 }
 
-.oslo-card {
-  padding: 16px 24px 40px 24px;
-  gap: 10px;
-  border-radius: 16px;
-  background: #fff;
-}
-
 .send-recieved-btn-section {
   display: flex;
   padding: 8px;
@@ -324,14 +285,6 @@
 
 .inactive-oslo-btn {
   border: 1px solid #cfb577;
-}
-.stats-section {
-  display: flex;
-  padding: 22.462px 17.628px 22.462px 16.718px;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 16px;
-  border: 1px solid #948f8f;
 }
 
 .stats-card {

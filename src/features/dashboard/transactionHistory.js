@@ -76,7 +76,7 @@ export default function SendTransaction() {
             <div className="d-flex justify-content-center">
               <OsloBtn activeBtn={activeBtn} setActiveBtn={btn => setActiveBtn(btn)} />
             </div>
-            <div className="d-flex p-4 justify-content-between">
+            <div className="d-flex p-4 justify-content-between oslo-form">
               {inputField({
                 name: "search",
                 value: "",

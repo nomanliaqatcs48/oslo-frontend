@@ -10,7 +10,7 @@ export default function SendTransaction() {
   const [activeBtn, setActiveBtn] = useState("send");
   const lableInput = ({ label, name, value, placeholder, type, options }) => {
     return (
-      <div className="mt-3">
+      <div className="mt-3 oslo-form">
         <Text label={label} size={16} weight={600} className="mb-1" />
         {type === "text" && (
           <Form.Control
@@ -22,8 +22,8 @@ export default function SendTransaction() {
           />
         )}
         {type === "select" && (
-          <Form.Select aria-label="Default select example">
-            <option>{placeholder}</option>
+          <Form.Select>
+            <option disabled>{placeholder}</option>
           </Form.Select>
         )}
       </div>

@@ -34,9 +34,7 @@ export default function ConnectWallet({setWalletPage}) {
             <div className="col-12 col-md-6 col-lg-5">
              
               <Button label="Create New Wallet" onClick={() => setWalletPage("new")} />
-              <button className="btn action-btn-secondary action-btn mt-3" onClick={() => setWalletPage("exist")}>
-                <span>Connect Existing Wallet</span>
-              </button>
+              <Button label="Connect Existing Wallet" className="mt-3" secondary={true} onClick={() => setWalletPage("exist")} />
             </div>
           </div>
         </div>

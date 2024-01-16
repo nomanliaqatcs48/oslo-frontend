@@ -13,7 +13,7 @@ export default function Dashboard() {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-4 col-md-2 col-lg-2">
+        <div className="col-4 col-md-2 col-lg-2 sidebar">
           <Sidebar
             activeTab={activeTab}
             setActiveTab={(tab) => setActiveTab(tab)}
@@ -21,7 +21,6 @@ export default function Dashboard() {
         </div>
         <div
           className="col-8 col-md-10 col-lg-10"
-          style={{ background: "#F8FAFC" }}
         >
           <div className="mt-4">
             <Header page="dashboard" />
