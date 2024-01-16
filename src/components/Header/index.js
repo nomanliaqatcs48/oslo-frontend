@@ -28,9 +28,9 @@ export default function Header({ page }) {
             <img
               src={theme === "light" ? LightThemeSVG : DarkThemeSVG}
               alt="theme"
-              width={28}
-              height={28}
-              className="cursor-pointer mr-4"
+              width={32}
+              height={32}
+              className={`cursor-pointer mr-4 ${page === "dashboard" && "mt-1"}`}
               onClick={() =>
                 dispatch(setTheme(theme === "light" ? "dark" : "light"))
               }
