@@ -32,7 +32,7 @@ export default function SendTransaction() {
   const card = ({ label, value, background }) => {
     return (
       <div className={`stats-card ${background}`}>
-        <Text label={label} size={14} weight={600} lineHeight={36} />
+        <Text label={label} size={14} weight={600} />
         <Text label={value} />
       </div>
     );
@@ -41,7 +41,7 @@ export default function SendTransaction() {
   return (
     <div className="container">
       <div className="row">
-        <div className="m-auto col-12 col-md-10 col-lg-8">
+        <div className="m-auto col-12 col-md-12 col-lg-9">
           <div className="text-center mb-4">
             <Text label="Transaction History" size={24} weight={700} />
           </div>

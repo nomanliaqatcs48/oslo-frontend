@@ -33,7 +33,7 @@ export default function SendTransaction() {
   return (
     <div className="container">
       <div className="row">
-        <div className="m-auto col-12 col-md-8 col-lg-4">
+        <div className="m-auto col-12 col-md-9 col-lg-5">
           {success ? (
             <Success setSuccess={() => setSuccess(!success)} />
           ) : (
