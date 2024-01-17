@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import Text from "../../components/Text";
-import Button from "../../components/Button";
 import OsloBtn from "./osloBtn";
 
 export default function SendTransaction() {

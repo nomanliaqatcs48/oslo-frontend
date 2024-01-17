@@ -2,7 +2,7 @@ import Form from "react-bootstrap/Form";
 import LightWalletIcon from "../../assets/lightWalletIcon.png";
 import Button from "../../components/Button";
 
-export default function ConnectWallet({setWalletPage}) {
+export default function ConnectWallet({ setWalletPage }) {
   return (
     <div className="bg-image">
       <p className="login-content">
@@ -32,9 +32,16 @@ export default function ConnectWallet({setWalletPage}) {
 
           <div className="row justify-content-center">
             <div className="col-12 col-md-6 col-lg-5">
-             
-              <Button label="Create New Wallet" onClick={() => setWalletPage("new")} />
-              <Button label="Connect Existing Wallet" className="mt-3" secondary={true} onClick={() => setWalletPage("exist")} />
+              <Button
+                label="Create New Wallet"
+                onClick={() => setWalletPage("new")}
+              />
+              <Button
+                label="Connect Existing Wallet"
+                className="mt-3"
+                secondary={true}
+                onClick={() => setWalletPage("exist")}
+              />
             </div>
           </div>
         </div>

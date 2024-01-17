@@ -3,7 +3,11 @@ import LightBulb from "../../../assets/bulb.svg";
 import PharseSection from "../pharseSection";
 import Button from "../../../components/Button";
 
-export default function SecretRecoveryPhrase({ pageStep, setPageStep, pharseVals }) {
+export default function SecretRecoveryPhrase({
+  pageStep,
+  setPageStep,
+  pharseVals,
+}) {
   return (
     <div className="mt-4">
       <div className="content fw-bold">
@@ -29,9 +33,6 @@ export default function SecretRecoveryPhrase({ pageStep, setPageStep, pharseVals
 
       <div className="row justify-content-center mt-5">
         <div className="col-12 col-md-20 col-lg-8">
-          {/* <button className="btn action-btn-primary action-btn">
-            <span>Confirm Secret Recovery Phrase</span>
-          </button> */}
           <Button
             label="Confirm Secret Recovery Phrase"
             onClick={() => setPageStep(4)}

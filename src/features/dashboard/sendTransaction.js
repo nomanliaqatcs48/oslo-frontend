@@ -23,7 +23,7 @@ export default function SendTransaction() {
         )}
         {type === "select" && (
           <Form.Select>
-            <option disabled>{placeholder}</option>
+            <option>{placeholder}</option>
           </Form.Select>
         )}
       </div>
@@ -45,16 +45,6 @@ export default function SendTransaction() {
                 <Text label="OSLO 200,000" size={38} weight={600} />
               </div>
               <div className="oslo-card mt-3">
-                {/* <div className="send-recieved-btn-section">
-                  <div className="oslo-btn active-oslo-btn">
-                    Send
-                    <i class="bi bi-arrow-up-right-square-fill"></i>
-                  </div>
-                  <div className="oslo-btn inactive-oslo-btn">
-                    Receive
-                    <i class="bi bi-arrow-down-left-square-fill"></i>
-                  </div>
-                </div> */}
                 <OsloBtn activeBtn={activeBtn} setActiveBtn={btn => setActiveBtn(btn)} />
                 <div className="mt-4 mb-2">
                   {lableInput({

@@ -22,7 +22,7 @@ export default function Step1({ setPageStep }) {
             required
           />
           <InputGroup.Text>
-            {/* <i class="bi bi-eye"></i> */}
+            {/* <i className="bi bi-eye"></i> */}
             <i className="bi bi-eye-slash"></i>
           </InputGroup.Text>
         </InputGroup>
@@ -51,10 +51,11 @@ export default function Step1({ setPageStep }) {
             }
           />
         </div>
-         <Button label="Create New Wallet" className="mt-4 mb-5" onClick={() => setPageStep(2)}/>
-        {/* <button className="btn action-btn-primary action-btn mt-4 mb-5">
-          <span>Create New Wallet</span>
-        </button> */}
+        <Button
+          label="Create New Wallet"
+          className="mt-4 mb-5"
+          onClick={() => setPageStep(2)}
+        />
       </div>
     </>
   );

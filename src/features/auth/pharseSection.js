@@ -66,17 +66,6 @@ export default function PharseSecton({
           <div className={`${hidePhase && "alerting"} row`}>
             {pharseValues.length > 0 &&
               pharseValues.map((pharse, i) => InputField(pharse))}
-            {/* {InputField("value2", "muscle")}
-            {InputField("value3", "jeans")}
-            {InputField("value4", "match")}
-            {InputField("value5", "olympic")}
-            {InputField("value6", "owl")}
-            {InputField("value7", "run")}
-            {InputField("value8", "zone")}
-            {InputField("value9", "issue")}
-            {InputField("value10", "risk")}
-            {InputField("value11", "dev")}
-            {InputField("value12", "cricket")} */}
           </div>
         </div>
       </div>

@@ -1,13 +1,10 @@
-import "./Sidebar.css";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearState } from "../../features/product/product.slice";
 import Logo from "../../assets/logo.svg";
-import Clock from "../../assets/clock.svg";
-import Send from "../../assets/send.svg";
+import "./Sidebar.css";
 
-export const Sidebar = ({activeTab, setActiveTab}) => {
+export const Sidebar = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onSignOut = () => {
@@ -16,7 +13,6 @@ export const Sidebar = ({activeTab, setActiveTab}) => {
     dispatch(clearState());
     navigate("/");
   };
-  const [toggle, setToggle] = useState(false);
 
   return (
     <>
@@ -24,14 +20,28 @@ export const Sidebar = ({activeTab, setActiveTab}) => {
         <nav className="nav">
           <img src={Logo} alt="logo" height={35} />
           <div className="mt-5 justify-content-center d-grid">
-            <div className={`d-flex mb-2 cursor-pointer sidebar-content ${activeTab === 'dashboard' && 'active' }`} onClick={() => {navigate("/dashboard"); setActiveTab("dashboard")}} >
-              {/* <img src={Send} alt="send" height={20} className="mr-2" style={{marginTop: 2}} /> */}
-              <i class="bi bi-send-fill mr-2"></i>
+            <div
+              className={`d-flex mb-2 cursor-pointer sidebar-content ${
+                activeTab === "dashboard" && "active"
+              }`}
+              onClick={() => {
+                navigate("/dashboard");
+                setActiveTab("dashboard");
+              }}
+            >
+              <i className="bi bi-send-fill mr-2"></i>
               <span className="description">Send & Receive</span>
             </div>
-            <div className={`d-flex mb-2 cursor-pointer sidebar-content ${activeTab === 'history' && 'active' }`} onClick={() => {navigate("/history"); setActiveTab("history")}}>
-              {/* <img src={Clock} alt="send" height={20}  style={{marginTop: 2}} /> */}
-              <i class="bi bi-clock-fill mr-2"></i>
+            <div
+              className={`d-flex mb-2 cursor-pointer sidebar-content ${
+                activeTab === "history" && "active"
+              }`}
+              onClick={() => {
+                navigate("/history");
+                setActiveTab("history");
+              }}
+            >
+              <i className="bi bi-clock-fill mr-2"></i>
               <span className="description">Transaction History</span>
             </div>
           </div>

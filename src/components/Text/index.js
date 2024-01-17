@@ -17,8 +17,6 @@ line-height: ${props => `${props.lineHeight}px` || '24px'};
 
 `;
 
-// background: ${props => props.theme[props.color] || props.theme.primary};
-// color: ${props => props.theme[props.color] || props.theme.white};
 function Text(props) {
   const { label } = props;
   return <CustomText {...props}>{label}</CustomText>;

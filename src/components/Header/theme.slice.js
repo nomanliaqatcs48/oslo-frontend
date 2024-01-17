@@ -1,7 +1,7 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  theme: "light"
+  theme: window.localStorage.getItem("theme") || "light",
 };
 
 export const themeSlice = createSlice({
@@ -10,8 +10,9 @@ export const themeSlice = createSlice({
   reducers: {
     clearState: () => initialState,
     setTheme: (state, action) => {
-        state.theme = action.payload;
-      },
+      window.localStorage.setItem("theme", action.payload);
+      state.theme = action.payload;
+    },
   },
 });
 
