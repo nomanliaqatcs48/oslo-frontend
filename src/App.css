@@ -64,11 +64,10 @@
 
 .bg-image {
   background-image: url("./assets/lightBG.png");
-  height: 75vh;
+  height: 100%;
   padding: 4rem 3.5rem;
-  /* background-size: cover; 
-  background-position: center; */
   background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .login-content {
@@ -86,14 +85,6 @@
   font-style: normal;
   font-weight: 700;
   line-height: 32px; /* 133.333% */
-}
-
-.wallet-section {
-  border-radius: 16px;
-  backdrop-filter: blur(2px);
-  width: 100%;
-  height: auto;
-  margin-top: 1rem;
 }
 
 .login-heading {
