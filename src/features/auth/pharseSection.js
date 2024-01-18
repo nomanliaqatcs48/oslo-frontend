@@ -20,7 +20,7 @@ export default function PharseSecton({
 
   const InputField = (pharse) => {
     return (
-      <div className="col-4 mt-3" key={pharse?.id}>
+      <div className="col-4 mt-3 oslo-form" key={pharse?.id}>
         <Form.Control
           className="secure-input"
           type="text"
