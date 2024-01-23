@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../../components/Button";
 
-export default function SecureWallet({ setPageStep }) {
+export default function SecureWallet({ setPageStep, createAccount }) {
   return (
     <div className="mt-4">
       <div className="secure mb-4 content">
@@ -32,7 +32,13 @@ export default function SecureWallet({ setPageStep }) {
         </p>
         <div className="row justify-content-center mt-5 mb-4">
           <div className="col-12 col-md-20 col-lg-8">
-            <Button label="Secure My Wallet" onClick={() => setPageStep(3)} />
+            <Button
+              label="Secure My Wallet"
+              onClick={() => {
+                setPageStep(3);
+                createAccount();
+              }}
+            />
           </div>
         </div>
       </div>

@@ -8,10 +8,9 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onSignOut = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    localStorage.removeItem("address");
     dispatch(clearState());
-    navigate("/");
+    navigate("/login");
   };
 
   return (
@@ -45,10 +44,10 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
               <span className="description">Transaction History</span>
             </div>
           </div>
-          {/* <li onClick={onSignOut} className="nav_link" role="button">
+          <li onClick={onSignOut} className="nav_link" role="button">
             <i className="bi bi-box-arrow-right"></i>
             <span className="nav_name">Sign Out</span>
-          </li> */}
+          </li>
         </nav>
       </div>
     </>

@@ -184,14 +184,6 @@
   color: var(--light-gray);
 }
 
-.seed-section {
-  padding: 24px;
-  gap: 24px;
-  border: 1px solid #000;
-  border-radius: 16px;
-  margin-top: 2rem;
-}
-
 .typography-1 {
   font-size: 12px;
   font-style: normal;

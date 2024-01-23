@@ -7,6 +7,8 @@ const initialState = {
   isSuccess: false,
   isError: false,
   error: null,
+  pharse: true,
+  seedPharse: ""
 };
 
 export const loginUser = createAsyncThunk(
@@ -35,6 +37,12 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     clearState: () => initialState,
+    toggleSeedPharse: (state, action) => {
+      state.pharse = action.payload;
+    },
+    setSeedPharse: (state, action) => {
+      state.seedPharse = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(loginUser.pending, (state) => {
@@ -55,5 +63,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { clearState } = authSlice.actions;
+export const { clearState, toggleSeedPharse, setSeedPharse } = authSlice.actions;
 export default authSlice.reducer;

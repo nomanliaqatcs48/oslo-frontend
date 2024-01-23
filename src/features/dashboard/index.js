@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header";
 import Send from "./sendTransaction";
 import TransactionHistory from "./transactionHistory";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("dashboard");
 
   useEffect(() => {
+    const addreess = localStorage.getItem("address");
+    !addreess && navigate("/login")
     setActiveTab(window.location.pathname.split("/")[1]);
   }, []);
   return (

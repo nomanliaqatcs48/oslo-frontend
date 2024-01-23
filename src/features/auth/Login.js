@@ -21,14 +21,13 @@ export function Login() {
   const {} = useSelector((state) => state.auth);
   
   useEffect(() => {
+    const addreess = localStorage.getItem("address");
+    addreess && navigate("/dashboard")
     if (pharseValues.length === 0) {
       let pharses = [];
       for (let i = 1; i <= 12; i++) {
-        const item = {
-          id: `value-${i}`,
-          value: generate({ minLength: 3, maxLength: 5 })
-        };
-        pharses.push(i%2===0 ? item : {});
+        const item = '';
+        pharses.push(item);
       }
       setPharseValues(pharses);
     }

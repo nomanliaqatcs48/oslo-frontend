@@ -22,7 +22,8 @@ const CustomButton = styled.button`
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  opacity: ${(props) => (props.disabled ? 0.55 : 1)};
 `;
 
 function Button(props) {

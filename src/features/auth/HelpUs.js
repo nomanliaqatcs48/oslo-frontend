@@ -31,7 +31,7 @@ export default function HelpUs({ setWalletPage, setShowCreatePasswordPage }) {
           Rest assured, we will never sell your data. Your trust is our
           priority.
         </div>
-        <p>
+        {/* <p>
           The data we collect is aggregated and, therefore, anonymous, aligning
           with the principles of the General Data Protection Regulation (EU)
           2016/679.
@@ -46,7 +46,7 @@ export default function HelpUs({ setWalletPage, setShowCreatePasswordPage }) {
         <p>
           Your support in this endeavour is vital, and together, we can make
           Oslo Crypto even better!
-        </p>
+        </p> */}
 
         <p>Thank you for choosing Oslo Crypto.</p>
         <div className="row justify-content-center">

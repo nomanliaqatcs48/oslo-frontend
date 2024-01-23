@@ -8,7 +8,7 @@ import OsloBtn from "./osloBtn";
 export default function SendTransaction() {
   const [success, setSuccess] = useState(false);
   const [activeBtn, setActiveBtn] = useState("send");
-  const lableInput = ({ label, name, value, placeholder, type, options }) => {
+  const lableInput = ({ label, name, value, placeholder, type, options, readOnly }) => {
     return (
       <div className="mt-3 oslo-form">
         <Text label={label} size={16} weight={600} className="mb-1" />
@@ -18,12 +18,17 @@ export default function SendTransaction() {
             name={name}
             placeholder={placeholder}
             size={"md"}
+            value={value}
             required
+            readOnly={readOnly}
           />
         )}
         {type === "select" && (
           <Form.Select>
-            <option>{placeholder}</option>
+            {options.length > 0 ? options.map((option, i) => (
+            <option value={option.value} key={i}>{option.label}</option>
+            ))
+          :  <option>{placeholder}</option>}
           </Form.Select>
         )}
       </div>
@@ -50,10 +55,10 @@ export default function SendTransaction() {
                   {lableInput({
                     label: "Send from",
                     name: "send_from",
-                    value: "",
+                    value: localStorage.getItem("address"),
                     placeholder: "Select Wallet",
-                    type: "select",
-                    options: [],
+                    type: "text",
+                    readOnly: true
                   })}
                   {lableInput({
                     label: "Send To",
@@ -68,7 +73,7 @@ export default function SendTransaction() {
                     value: "",
                     placeholder: "Select Asset",
                     type: "select",
-                    options: [],
+                    options: [{value: "oslo", label: "Oslo"}],
                   })}
                   {lableInput({
                     label: "Amount",

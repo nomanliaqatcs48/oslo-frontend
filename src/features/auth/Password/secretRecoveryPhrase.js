@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleSeedPharse } from "../auth.slice";
 import LightBulb from "../../../assets/bulb.svg";
 import PharseSection from "../pharseSection";
 import Button from "../../../components/Button";
@@ -8,6 +10,7 @@ export default function SecretRecoveryPhrase({
   setPageStep,
   pharseVals,
 }) {
+  const dispatch = useDispatch();
   return (
     <div className="mt-4">
       <div className="content fw-bold">
@@ -35,7 +38,10 @@ export default function SecretRecoveryPhrase({
         <div className="col-12 col-md-20 col-lg-8">
           <Button
             label="Confirm Secret Recovery Phrase"
-            onClick={() => setPageStep(4)}
+            onClick={() => {
+              dispatch(toggleSeedPharse(false));
+              setPageStep(4);
+            }}
           />
         </div>
       </div>

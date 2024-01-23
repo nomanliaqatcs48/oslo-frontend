@@ -21,8 +21,8 @@ export default function Header({ page }) {
           )}
           <div className="ml-auto d-flex oslo-form">
             {page === "dashboard" && (
-              <Form.Select style={{ width: 220, marginRight: 15 }}>
-                <option>Account 01</option>
+              <Form.Select style={{ width: 300, marginRight: 15 }}>
+                <option>{window.localStorage.getItem("address")}</option>
               </Form.Select>
             )}
             <img

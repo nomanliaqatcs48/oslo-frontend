@@ -119,4 +119,12 @@ export const GlobalStyles = createGlobalStyle`
     margin-top: 1rem;
   }
 
+  .seed-section {
+    padding: 24px;
+    gap: 24px;
+    border: 1px solid #bbb4a4;
+    border-radius: 16px;
+    margin-top: 2rem;
+  }
+
   `;

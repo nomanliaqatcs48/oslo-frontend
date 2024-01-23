@@ -95,6 +95,8 @@ h1 {
   /* color: var(--first-color-light); */
   margin-bottom: 1.5rem;
   transition: 0.3s;
+  bottom: 0;
+  position: fixed;
 }
 
 .nav_logo:hover,

@@ -1,18 +1,20 @@
 import React from "react";
-import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import { ToastContainer } from "react-toastify";
 import { Login } from "./features/auth/Login";
 import Dashboard from "./features/dashboard";
 import { useSelector } from "react-redux";
 import { GlobalStyles } from "./global";
 import { lightTheme, darkTheme } from "./theme";
+import "./App.css";
 
 function App() {
   const { theme } = useSelector((state) => state.theme);
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <ToastContainer />
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
