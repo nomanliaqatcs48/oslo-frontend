@@ -94,7 +94,7 @@ export default function Step1({ setPageStep }) {
                 <div className="d-flex">
                   <Form.Check
                     type={"checkbox"}
-                    id={"term-checkbox"}
+                    id={"pass-term-checkbox"}
                     checked={values.check}
                     label={
                       <p className="description">

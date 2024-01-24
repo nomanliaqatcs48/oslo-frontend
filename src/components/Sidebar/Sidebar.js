@@ -44,7 +44,7 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
               <span className="description">Transaction History</span>
             </div>
           </div>
-          <li onClick={onSignOut} className="nav_link" role="button">
+          <li onClick={onSignOut} className="nav_link sidebar-content" role="button">
             <i className="bi bi-box-arrow-right"></i>
             <span className="nav_name">Sign Out</span>
           </li>

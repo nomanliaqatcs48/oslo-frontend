@@ -61,6 +61,12 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text} !important;
   }
 
+  .oslo-form .form-check-input:checked {
+    background-color: #2C2C2C !important;
+    border: 1px solid #948F8F !important;
+    color: ${({ theme }) => theme.text} !important;
+  }
+
   .description {
     font-size: 16px;
     font-style: normal;

@@ -23,7 +23,7 @@ export default function ConnectWallet({ setWalletPage }) {
             className="mt-5 mb-4"
             height={140}
           />
-          <div className="d-flex text-center w-100 justify-content-center">
+          <div className="d-flex text-center w-100 justify-content-center oslo-form">
             <Form.Check
               type={"checkbox"}
               checked={checkedTerms}
