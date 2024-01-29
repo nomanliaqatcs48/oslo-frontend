@@ -4,8 +4,11 @@ import Table from "react-bootstrap/Table";
 import Text from "../../components/Text";
 import OsloBtn from "./osloBtn";
 
+import { sendToken } from "../../wallet-utils/TransactionUtils";
+
 export default function SendTransaction() {
   const [activeBtn, setActiveBtn] = useState("send");
+
   const inputField = ({ name, value, placeholder, type, options }) => {
     return (
       <>

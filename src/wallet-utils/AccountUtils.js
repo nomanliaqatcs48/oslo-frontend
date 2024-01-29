@@ -9,7 +9,8 @@ export function generateAccount(seedPhrase = "", index = 0) {
   // If the seed phrase does not contain spaces, it is likely a mnemonic
   if (seedPhrase.includes(" ")) {
     try {
-      wallet = Wallet.fromPhrase(seedPhrase, `m/44'/60'/0'/0/${index}`);
+      wallet = Wallet.fromMnemonic(seedPhrase, `m/44'/60'/0'/0/${index}`);
+      debugger
     } catch (err) {
       return false;
     }

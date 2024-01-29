@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 import Success from "./success";
 import OsloBtn from "./osloBtn";
 
-export default function SendTransaction() {
+export default function SendTransaction({balance}) {
   const [success, setSuccess] = useState(false);
   const [activeBtn, setActiveBtn] = useState("send");
   const lableInput = ({ label, name, value, placeholder, type, options, readOnly }) => {
@@ -47,7 +47,7 @@ export default function SendTransaction() {
                 <Text label="Send & Receive" size={24} weight={700} />
               </div>
               <div className="total-oslo mt-2">
-                <Text label="OSLO 200,000" size={38} weight={600} />
+                <Text label={`OSLO ${balance}`} size={38} weight={600} />
               </div>
               <div className="oslo-card mt-3">
                 <OsloBtn activeBtn={activeBtn} setActiveBtn={btn => setActiveBtn(btn)} />

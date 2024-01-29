@@ -4,10 +4,32 @@ import { Sidebar } from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header";
 import Send from "./sendTransaction";
 import TransactionHistory from "./transactionHistory";
+import { ethers } from "ethers";
+import { CHAINS_CONFIG, mainnet, mumbai } from "../../wallet-utils/Chain";
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("dashboard");
+  const [balance, setBalance] = useState("0");
+
+  const fetchData = async () => {
+    const chain = CHAINS_CONFIG[mainnet.chainId];
+    const provider = new ethers.providers.JsonRpcProvider(chain.rpcUrl);
+    const adddress = window.localStorage.getItem("address");
+    let accountBalance = await provider.getBalance(adddress);
+    // const balance = await web3.eth.getBalance(connectedAccount[0]);
+    setBalance(
+      String(formatEthFunc(ethers.utils.formatEther(accountBalance)))
+    );
+  };
+
+  function formatEthFunc(value, decimalPlaces = 2) {
+    return +parseFloat(value).toFixed(decimalPlaces);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const addreess = localStorage.getItem("address");
@@ -28,7 +50,7 @@ export default function Dashboard() {
         >
           <div className="mt-4">
             <Header page="dashboard" />
-            {activeTab === "dashboard" && <Send />}
+            {activeTab === "dashboard" && <Send balance={balance} />}
             {activeTab === "history" && <TransactionHistory />}
           </div>
         </div>
