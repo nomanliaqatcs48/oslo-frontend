@@ -9,6 +9,7 @@ import Password from "./Password";
 import PharseSecton from "./pharseSection";
 import { generate } from "random-words";
 import { useDarkMode } from "../../components/Theme";
+import LockPassword from "./LockPassword";
 
 export function Login() {
   const dispatch = useDispatch();
@@ -19,14 +20,14 @@ export function Login() {
   const [showCreatePasswordPage, setShowCreatePasswordPage] = useState(false);
   const [theme, toggleTheme, componentMounted] = useDarkMode();
   const {} = useSelector((state) => state.auth);
-  
+
   useEffect(() => {
-    const addreess = localStorage.getItem("address");
-    addreess && navigate("/dashboard")
+    const loginType = localStorage.getItem("loginType");
+    loginType && loginType === "success" && navigate("/dashboard");
     if (pharseValues.length === 0) {
       let pharses = [];
       for (let i = 1; i <= 12; i++) {
-        const item = '';
+        const item = "";
         pharses.push(item);
       }
       setPharseValues(pharses);
@@ -55,7 +56,14 @@ export function Login() {
                 <div className="main">
                   <div className="row justify-content-center">
                     <div className="col-12 col-md-10 col-lg-8">
-                      <PharseSecton walletPage={walletPage} pharseVals={pharseValues} />
+                      {localStorage.getItem("loginType") === "lock" ? (
+                        <LockPassword />
+                      ) : (
+                        <PharseSecton
+                          walletPage={walletPage}
+                          pharseVals={pharseValues}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>

@@ -6,12 +6,15 @@ import { toast } from "react-toastify";
 import Button from "../../components/Button";
 import { toggleSeedPharse } from "./auth.slice";
 import { generateAccount } from "../../wallet-utils/AccountUtils";
+import Password from "../../components/Password";
+var CryptoJS = require("crypto-js");
 
 export default function PharseSecton({
   walletPage,
   pageStep,
   setPageStep,
   pharseVals,
+  pass
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -46,7 +49,20 @@ export default function PharseSecton({
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = ({ password }) => {
+    const pharseStr = pharseValues.join(" ");
+      // cloth job renew soul range equal agent device decade give carbon project
+      const account = generateAccount(pharseStr); // account object contains--> address, privateKey, seedPhrase, balance
+
+      if (account) {
+        const address = account.account.address
+        var pharseText = CryptoJS.AES.encrypt(pharseStr, password).toString();
+        var secret = CryptoJS.AES.encrypt(password, address).toString();
+        window.localStorage.setItem("address", address);
+        window.localStorage.setItem("pharse", pharseText);
+        window.localStorage.setItem("secret", secret);
+        window.localStorage.setItem("loginType", "success");
+      }
     if (pageStep === 4) {
       setPageStep(5);
     } else {
@@ -55,7 +71,6 @@ export default function PharseSecton({
       const account = generateAccount(pharseStr); // account object contains--> address, privateKey, seedPhrase, balance
 
       if (account) {
-        window.localStorage.setItem("address", account.account.address);
         navigate("/dashboard");
       } else {
         toast.error("Invalid mnemonic phrase", {
@@ -103,10 +118,21 @@ export default function PharseSecton({
           </div>
         </div>
       </div>
-      {(walletPage === "exist" || pageStep === 4) && (
+      {walletPage === "exist" && (
+        <div className="pt-4 oslo-form">
+          <Password
+            onSubmit={({ password }) => {          
+              handleSubmit({password})
+            }}
+            btnLabel={"Submit"}
+            section={"recovery_phrase"}
+          />
+        </div>
+      )}
+      {pageStep === 4 && (
         <div className="row justify-content-center mt-5">
           <div className="col-12 col-md-10 col-lg-8">
-            <Button label="Submit" onClick={handleSubmit} />
+            <Button label="Submit" onClick={() => handleSubmit({password: pass})} />
           </div>
         </div>
       )}

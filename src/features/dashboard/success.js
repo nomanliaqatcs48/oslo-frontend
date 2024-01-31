@@ -3,7 +3,7 @@ import Text from "../../components/Text";
 import Button from "../../components/Button";
 import LightCheck from "../../assets/light-check.png";
 
-export default function success({setSuccess}) {
+export default function success({setSuccess, data}) {
   return (
     <div className="oslo-card mt-3">
       <div className="text-center mt-3">
@@ -11,14 +11,15 @@ export default function success({setSuccess}) {
       </div>
       <Text
         label="Transaction Successful!"
-        size={24}
+        size={22}
         weight="700"
         className="mt-5 mb-4"
       />
       <Text
-        label="Congratulations, You've successfully sent OSLO 450 to the XXX account. Your transaction is complete."
-        size={18}
+        label={`Congratulations, You've successfully sent OSLO "${data.amount}" to the "${data.destinationAddress}" account. Your transaction is complete.`}
+        size={16}
         lineHeight={32}
+        weight="600"
       />
       <Button label="Back to Wallet" onClick={setSuccess} className="mt-4" />
     </div>

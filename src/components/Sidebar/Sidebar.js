@@ -8,7 +8,17 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onSignOut = () => {
-    localStorage.removeItem("address");
+    window.localStorage.removeItem("address");
+    window.localStorage.removeItem("loginType");
+    window.localStorage.removeItem("pharse");
+    window.localStorage.removeItem("secret");
+    dispatch(clearState());
+    navigate("/login");
+  };
+
+  const onLock = () => {
+    window.localStorage.setItem("loginType", "lock");
+    window.localStorage.removeItem("secret");
     dispatch(clearState());
     navigate("/login");
   };
@@ -44,10 +54,16 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
               <span className="description">Transaction History</span>
             </div>
           </div>
-          <li onClick={onSignOut} className="nav_link sidebar-content" role="button">
-            <i className="bi bi-box-arrow-right"></i>
+          <div className="nav_link">
+          <li onClick={onLock} className="nav_end_lock_link active" role="button">
+            <i className="bi bi-lock mr-2"></i>
+            <span className="nav_name">Lock</span>
+          </li>
+          <li onClick={onSignOut} className="nav_end_link active" role="button">
+            <i className="bi bi-box-arrow-right mr-2"></i>
             <span className="nav_name">Sign Out</span>
           </li>
+          </div>
         </nav>
       </div>
     </>

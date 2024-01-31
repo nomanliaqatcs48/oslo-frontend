@@ -74,6 +74,14 @@ h1 {
   padding: 0.5rem 0 0.5rem 1.5rem;
 }
 
+.nav_lock_link {
+  position: relative;
+  margin-bottom: 1.5rem;
+  transition: 0.3s;
+  bottom: 0;
+  position: fixed;
+}
+
 .nav_logo {
   margin-bottom: 2rem;
   color: var(--first-color-light);
@@ -97,6 +105,19 @@ h1 {
   transition: 0.3s;
   bottom: 0;
   position: fixed;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav_end_link {
+  display: flex;
+ padding: 9px 50px 8px 50px;
+}
+
+.nav_end_lock_link {
+  display: flex;
+ padding: 9px 62px 8px 64px;
+ margin-bottom: 20px;
 }
 
 .nav_logo:hover,
