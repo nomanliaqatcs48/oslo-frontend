@@ -10,6 +10,7 @@ import Success from "./success";
 import OsloBtn from "./osloBtn";
 import { sendToken } from "../../wallet-utils/TransactionUtils";
 import { generateAccount } from "../../wallet-utils/AccountUtils";
+import RecieveTransaction from "./recieveTransaction";
 var CryptoJS = require("crypto-js");
 
 export default function SendTransaction({ balance, fetchData }) {
@@ -125,6 +126,7 @@ export default function SendTransaction({ balance, fetchData }) {
                   activeBtn={activeBtn}
                   setActiveBtn={(btn) => setActiveBtn(btn)}
                 />
+                {activeBtn === "send" ? (
                 <Formik
                   initialValues={{
                     send_from: localStorage.getItem("address"),
@@ -218,6 +220,7 @@ export default function SendTransaction({ balance, fetchData }) {
                     );
                   }}
                 </Formik>
+                ): (<RecieveTransaction address={localStorage.getItem("address")} />)}
               </div>
             </>
           )}

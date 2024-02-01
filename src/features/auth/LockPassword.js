@@ -11,6 +11,12 @@ var CryptoJS = require("crypto-js");
 export default function LockPassword() {
   const navigate = useNavigate();
   const [passView, setPassView] = useState(false);
+  const forgotPassword = () => {
+    window.localStorage.removeItem("address");
+    window.localStorage.removeItem("loginType");
+    window.localStorage.removeItem("pharse");
+    window.localStorage.removeItem("secret");
+  };
   return (
     <>
       <img
@@ -49,7 +55,7 @@ export default function LockPassword() {
         {(props) => {
           const { values, touched, errors, handleChange, handleSubmit } = props;
           return (
-            <form onSubmit={handleSubmit} className="w-100">
+            <form onSubmit={handleSubmit} className="w-100 mt-5">
               <Form.Label className="content">Password</Form.Label>
               <InputGroup className="mb-4">
                 <Form.Control
@@ -73,10 +79,13 @@ export default function LockPassword() {
               </InputGroup>
               <Button
                 label={"Unlock"}
-                className="mt-4 mb-5"
+                className="mt-4 mb-3"
                 // onClick={() => setPageStep(2)}
                 type="submit"
               />
+              <p className="forgot_link" onClick={forgotPassword}>
+                Forgot password?
+              </p>
               {/* )} */}
             </form>
           );

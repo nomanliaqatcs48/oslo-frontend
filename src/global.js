@@ -133,4 +133,11 @@ export const GlobalStyles = createGlobalStyle`
     margin-top: 2rem;
   }
 
+  .forgot_link {
+    color: #0d6efd;
+    text-decoration: underline;
+    text-align: center;
+    font-weight: bold;
+  }
+
   `;
