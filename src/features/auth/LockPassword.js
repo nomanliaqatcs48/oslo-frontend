@@ -4,11 +4,12 @@ import * as Yup from "yup";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Button from "../../components/Button";
 import Logo from "../../assets/logo.svg";
 var CryptoJS = require("crypto-js");
 
-export default function LockPassword() {
+export default function LockPassword({setLoginType}) {
   const navigate = useNavigate();
   const [passView, setPassView] = useState(false);
   const forgotPassword = () => {
@@ -16,6 +17,7 @@ export default function LockPassword() {
     window.localStorage.removeItem("loginType");
     window.localStorage.removeItem("pharse");
     window.localStorage.removeItem("secret");
+    setLoginType();
   };
   return (
     <>
@@ -46,8 +48,15 @@ export default function LockPassword() {
               let secret = CryptoJS.AES.encrypt(password, address).toString();
               window.localStorage.setItem("secret", secret);
               navigate("/dashboard");
+            } else {
+              toast.error("Please enter the correct password", {
+                theme: "colored",
+              });
             }
           } catch (e) {
+            toast.error("Please enter the correct password", {
+              theme: "colored",
+            });
             console.log(e);
           }
         }}

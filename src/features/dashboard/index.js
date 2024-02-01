@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Spinner from 'react-bootstrap/Spinner';
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header";
 import Send from "./sendTransaction";
@@ -41,6 +42,7 @@ export default function Dashboard() {
   return (
     <div className="container-fluid">
       <div className="row">
+        
         <div className="col-4 col-md-2 col-lg-2 sidebar">
           <Sidebar
             activeTab={activeTab}

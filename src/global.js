@@ -138,6 +138,12 @@ export const GlobalStyles = createGlobalStyle`
     text-decoration: underline;
     text-align: center;
     font-weight: bold;
+    cursor: pointer;
   }
 
+  .spinner-loading {
+    position: absolute; 
+    top: 50%;
+    left: 55%;
+  }
   `;

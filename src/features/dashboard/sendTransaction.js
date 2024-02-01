@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { toast } from "react-toastify";
+import Spinner from "react-bootstrap/Spinner";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
 import Success from "./success";
@@ -16,6 +17,7 @@ var CryptoJS = require("crypto-js");
 export default function SendTransaction({ balance, fetchData }) {
   const [success, setSuccess] = useState(false);
   const [activeBtn, setActiveBtn] = useState("send");
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   const lableInput = ({
     label,
@@ -71,6 +73,7 @@ export default function SendTransaction({ balance, fetchData }) {
     //   status: "pending",
     //   message: "",
     // });
+    setLoading(true);
     let pharse = window.localStorage.getItem("pharse");
     let secret = window.localStorage.getItem("secret");
     secret = CryptoJS.AES.decrypt(secret, accountAddress);
@@ -94,8 +97,10 @@ export default function SendTransaction({ balance, fetchData }) {
         console.log(receipt);
         setSuccess(!success);
         fetchData();
+        setLoading(false);
         return;
       } else {
+        setLoading(false);
         toast.error("Please enter the valid destination address!", {
           theme: "colored",
         });
@@ -103,6 +108,7 @@ export default function SendTransaction({ balance, fetchData }) {
         return;
       }
     } catch (error) {
+      setLoading(false);
       console.error(error);
     }
   };
@@ -127,100 +133,115 @@ export default function SendTransaction({ balance, fetchData }) {
                   setActiveBtn={(btn) => setActiveBtn(btn)}
                 />
                 {activeBtn === "send" ? (
-                <Formik
-                  initialValues={{
-                    send_from: localStorage.getItem("address"),
-                    send_to: "",
-                    asset: "oslo",
-                    amount: null,
-                  }}
-                  validationSchema={Yup.object({
-                    send_from: Yup.string().required("This field is required."),
-                    send_to: Yup.string().required("This field is required."),
-                    amount: Yup.string()
-                      .required("This field is required.")
-                      .matches(/(\d+(?:\.\d+)?)/)
-                  })}
-                  onSubmit={(values) => {
-                    // const {fullName, email, password} = values;
-                    // const data = {
-                    //   userName: fullName,
-                    //   email,
-                    //   password
-                    // }
-                    // register(data);
-                    const { amount, send_from, send_to } = values;
-                    transfer({
-                      amount: amount,
-                      accountAddress: send_from,
-                      destinationAddress: send_to,
-                    });
-                  }}
-                >
-                  {(props) => {
-                    const {
-                      values,
-                      touched,
-                      errors,
-                      handleChange,
-                      handleSubmit,
-                    } = props;
-                    return (
-                      <form onSubmit={handleSubmit} className="w-100">
-                        <div className="mt-4 mb-2">
-                          {lableInput({
-                            label: "Send from",
-                            name: "send_from",
-                            value: values.send_from,
-                            placeholder: "Select Wallet",
-                            type: "text",
-                            readOnly: true,
-                            onChange: handleChange,
-                            errors,
-                            touched,
-                          })}
-                          {lableInput({
-                            label: "Send To",
-                            name: "send_to",
-                            value: values.send_to,
-                            placeholder:
-                              "Enter public address (0x) or ENS name",
-                            type: "text",
-                            onChange: handleChange,
-                            errors,
-                            touched,
-                          })}
-                          {lableInput({
-                            label: "Asset",
-                            name: "asset",
-                            value: "",
-                            placeholder: "Select Asset",
-                            type: "select",
-                            options: [{ value: values.asset, label: "Oslo" }],
-                            errors,
-                          })}
-                          {lableInput({
-                            label: "Amount",
-                            name: "amount",
-                            value: values.amount,
-                            placeholder: "0.00",
-                            type: "text",
-                            onChange: handleChange,
-                            errors,
-                            touched,
-                          })}
-                        </div>
-                        <Button
-                          label="Send"
-                          type="submit"
-                          // onClick={() => setSuccess(!success)}
-                          className="mt-4"
-                        />
-                      </form>
-                    );
-                  }}
-                </Formik>
-                ): (<RecieveTransaction address={localStorage.getItem("address")} />)}
+                  <Formik
+                    initialValues={{
+                      send_from: localStorage.getItem("address"),
+                      send_to: "",
+                      asset: "oslo",
+                      amount: null,
+                    }}
+                    validationSchema={Yup.object({
+                      send_from: Yup.string().required(
+                        "This field is required."
+                      ),
+                      send_to: Yup.string().required("This field is required."),
+                      amount: Yup.string()
+                        .required("This field is required.")
+                        .matches(/(\d+(?:\.\d+)?)/),
+                    })}
+                    onSubmit={(values) => {
+                      // const {fullName, email, password} = values;
+                      // const data = {
+                      //   userName: fullName,
+                      //   email,
+                      //   password
+                      // }
+                      // register(data);
+                      const { amount, send_from, send_to } = values;
+                      transfer({
+                        amount: amount,
+                        accountAddress: send_from,
+                        destinationAddress: send_to,
+                      });
+                    }}
+                  >
+                    {(props) => {
+                      const {
+                        values,
+                        touched,
+                        errors,
+                        handleChange,
+                        handleSubmit,
+                      } = props;
+                      return (
+                        <form onSubmit={handleSubmit} className="w-100">
+                          <div className="mt-4 mb-2 position-relative">
+                            {lableInput({
+                              label: "Send from",
+                              name: "send_from",
+                              value: values.send_from,
+                              placeholder: "Select Wallet",
+                              type: "text",
+                              readOnly: true,
+                              onChange: handleChange,
+                              errors,
+                              touched,
+                            })}
+                            {lableInput({
+                              label: "Send To",
+                              name: "send_to",
+                              value: values.send_to,
+                              placeholder:
+                                "Enter public address (0x) or ENS name",
+                              type: "text",
+                              onChange: handleChange,
+                              errors,
+                              touched,
+                            })}
+                            {lableInput({
+                              label: "Asset",
+                              name: "asset",
+                              value: "",
+                              placeholder: "Select Asset",
+                              type: "select",
+                              options: [{ value: values.asset, label: "Oslo" }],
+                              errors,
+                            })}
+                            {lableInput({
+                              label: "Amount",
+                              name: "amount",
+                              value: values.amount,
+                              placeholder: "0.00",
+                              type: "text",
+                              onChange: handleChange,
+                              errors,
+                              touched,
+                            })}
+                          </div>
+                          <Button
+                            label="Send"
+                            type="submit"
+                            className="mt-4"
+                            disabled={loading}
+                          />
+                          {loading && (
+                            <div className="spinner-loading">
+                              <Spinner
+                                animation="grow"
+                                style={{ height: "7rem", width: "7rem" }}
+                                variant="dark"
+                              />
+                            </div>
+                          )}
+                        </form>
+                      );
+                    }}
+                  </Formik>
+                ) : (
+                  <RecieveTransaction
+                    address={localStorage.getItem("address")}
+                  />
+                )}
               </div>
             </>
           )}

@@ -18,11 +18,11 @@ export function Login() {
   const [walletPage, setWalletPage] = useState(null);
   const [pharseValues, setPharseValues] = useState([]);
   const [showCreatePasswordPage, setShowCreatePasswordPage] = useState(false);
+  const [loginType, setLoginType] = useState(localStorage.getItem("loginType"));
   const [theme, toggleTheme, componentMounted] = useDarkMode();
   const {} = useSelector((state) => state.auth);
 
   useEffect(() => {
-    const loginType = localStorage.getItem("loginType");
     loginType && loginType === "success" && navigate("/dashboard");
     if (pharseValues.length === 0) {
       let pharses = [];
@@ -32,6 +32,7 @@ export function Login() {
       }
       setPharseValues(pharses);
     }
+    loginType === "lock" && setWalletPage("exist")
   }, []);
 
   return (
@@ -56,8 +57,8 @@ export function Login() {
                 <div className="main">
                   <div className="row justify-content-center">
                     <div className="col-12 col-md-10 col-lg-8">
-                      {localStorage.getItem("loginType") === "lock" ? (
-                        <LockPassword />
+                      {loginType === "lock" ? (
+                        <LockPassword setLoginType={() => setLoginType("login")}/>
                       ) : (
                         <PharseSecton
                           walletPage={walletPage}
