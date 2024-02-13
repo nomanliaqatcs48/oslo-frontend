@@ -1,15 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
+import axios from "axios";
+import moment from "moment";
 import Text from "../../components/Text";
 import OsloBtn from "./osloBtn";
 
 import { sendToken } from "../../wallet-utils/TransactionUtils";
 
-export default function SendTransaction() {
+export default function SendTransaction({ address }) {
   const [activeBtn, setActiveBtn] = useState("send");
+  const [transactionsList, setTransactionsList] = useState([]);
+  const [originalTransactionsList, setOriginalTransactionsList] = useState([]);
+  const [searchVal, setSearchVal] = useState('');
+  const [status, setStatus] = useState("ok");
 
-  const inputField = ({ name, value, placeholder, type, options }) => {
+  const getTransactions = async () => {
+    await axios
+      .get(
+        `https://explorer.oslocrypto.com/api/v2/addresses/${address}/transactions?filter=to|from`
+      )
+      .then(({ data }) => {
+        console.log("data", data);
+        let items = data.items;
+        items.sort(function(a,b){
+          return new Date(b.timestamp) - new Date(a.timestamp);
+        });
+        setTransactionsList(items);
+        setOriginalTransactionsList(items);
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
+  };
+
+  useEffect(() => {
+    getTransactions();
+  }, []);
+
+  const onSearch = e => {
+    const value = e.target.value;
+    setSearchVal(value)
+    const filterTransactions = originalTransactionsList.filter(transaction => transaction.hash.includes(value));
+    setTransactionsList(filterTransactions);
+  }
+  
+  const onHandleStatus = e => {
+    const value = e.target.value;
+    setStatus(value);
+    const filterTransactions = originalTransactionsList.filter(transaction => transaction.status === value);
+    setTransactionsList(filterTransactions);
+  }
+
+  const inputField = ({ name, value, placeholder, type, onChange, options }) => {
     return (
       <>
         {type === "text" && (
@@ -20,11 +63,14 @@ export default function SendTransaction() {
             value={value}
             required
             className="mr-3"
+            onChange={onChange}
           />
         )}
         {type === "select" && (
-          <Form.Select className="mr-3">
-            <option>{placeholder}</option>
+          <Form.Select className="mr-3" value={value} onChange={onChange}>
+            {options.map(option => (
+            <option value={option.id}>{option.label}</option>
+            ))}
           </Form.Select>
         )}
       </>
@@ -43,7 +89,7 @@ export default function SendTransaction() {
   return (
     <div className="container">
       <div className="row">
-        <div className="m-auto col-12 col-md-12 col-lg-9">
+        <div className="m-auto col-12 col-md-12 col-lg-10">
           <div className="text-center mb-4">
             <Text label="Transaction History" size={24} weight={700} />
           </div>
@@ -63,7 +109,7 @@ export default function SendTransaction() {
               value: "500",
               background: "total-recieved-light",
             })}
-            {card({
+            {/* {card({
               label: "Total Successful",
               value: "2500",
               background: "total-successful-light",
@@ -72,18 +118,22 @@ export default function SendTransaction() {
               label: "Total Failed",
               value: "300",
               background: "total-failed-light",
-            })}
+            })} */}
           </div>
           <div className="oslo-card mt-3">
-            <div className="d-flex justify-content-center">
-              <OsloBtn activeBtn={activeBtn} setActiveBtn={btn => setActiveBtn(btn)} />
-            </div>
+            {/* <div className="d-flex justify-content-center">
+              <OsloBtn
+                activeBtn={activeBtn}
+                setActiveBtn={(btn) => setActiveBtn(btn)}
+              />
+            </div> */}
             <div className="d-flex p-4 justify-content-between oslo-form">
               {inputField({
                 name: "search",
-                value: "",
-                placeholder: "Search",
+                value: searchVal,
+                placeholder: "Search By Transaction ID",
                 type: "text",
+                onChange: (e) => onSearch(e)
               })}
               {inputField({
                 name: "time",
@@ -94,10 +144,11 @@ export default function SendTransaction() {
               })}
               {inputField({
                 name: "status",
-                value: "",
+                value: status,
                 placeholder: "Status",
                 type: "select",
-                options: [],
+                onChange: (e) => onHandleStatus(e),
+                options: [{id: "ok", label: "Successful"}, {id: "failed", label: "Failed"}],
               })}
             </div>
             <Table responsive="sm" hover>
@@ -111,46 +162,24 @@ export default function SendTransaction() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="table-header">
-                  <td align="center">0x1a8470</td>
-                  <td align="center">OSLO 250</td>
-                  <td align="center">15 Dec, 2023</td>
-                  <td align="center">
-                    <span className="success-status">Successful</span>
-                  </td>
-                </tr>
-                <tr className="table-header">
-                  <td align="center">0x1a8470</td>
-                  <td align="center">OSLO 250</td>
-                  <td align="center">15 Dec, 2023</td>
-                  <td align="center">
-                    <span className="success-status">Successful</span>
-                  </td>
-                </tr>
-                <tr className="table-header">
-                  <td align="center">0x1a8470</td>
-                  <td align="center">OSLO 250</td>
-                  <td align="center">15 Dec, 2023</td>
-                  <td align="center">
-                    <span className="failed-status">Failed</span>
-                  </td>
-                </tr>
-                <tr className="table-header">
-                  <td align="center">0x1a8470</td>
-                  <td align="center">OSLO 250</td>
-                  <td align="center">15 Dec, 2023</td>
-                  <td align="center">
-                    <span className="success-status">Successful</span>
-                  </td>
-                </tr>
-                <tr className="table-header">
-                  <td align="center">0x1a8470</td>
-                  <td align="center">OSLO 250</td>
-                  <td align="center">15 Dec, 2023</td>
-                  <td align="center">
-                    <span className="failed-status">Failed</span>
-                  </td>
-                </tr>
+                {transactionsList.length > 0 ? (
+                  transactionsList.map((transaction, i) => (
+                    <tr className="table-header" key={i}>
+                      <td align="center">{transaction.hash}</td>
+                      <td align="center">
+                        OSLO{" "}
+                        {(
+                          parseInt(transaction.value) / 1000000000000000000
+                        ).toFixed(2)}
+                      </td>
+                      <td align="center">
+                        {moment(transaction.timestamp).format("DD MMM, YYYY")}
+                      </td>
+                      <td align="center">
+                        <span className="success-status">Successful</span>
+                      </td>
+                    </tr>
+                  ))) : <h3 className="text-center" style={{position: "absolute", left: "53%", top: "70%"}}>Data not found!</h3>}
               </tbody>
             </Table>
           </div>

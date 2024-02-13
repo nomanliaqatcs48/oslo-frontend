@@ -125,7 +125,7 @@ export default function SendTransaction({ balance, fetchData }) {
                 <Text label="Send & Receive" size={24} weight={700} />
               </div>
               <div className="total-oslo mt-2">
-                <Text label={`OSLO ${balance}`} size={38} weight={600} />
+                <Text label={`OSLO ${parseInt(balance).toFixed(2)}`} size={38} weight={600} />
               </div>
               <div className="oslo-card mt-3">
                 <OsloBtn

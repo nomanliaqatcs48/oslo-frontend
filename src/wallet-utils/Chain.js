@@ -6,7 +6,7 @@ export const mumbai = {
 };
 
 export const mainnet = {
-    chainId: '1',
+    chainId: '5',
     name: 'Ethereum',
     blockExplorerUrl: 'https://etherscan.io',
     rpcUrl: 'https://rpc.oslocrypto.com/',

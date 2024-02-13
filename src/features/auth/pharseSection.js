@@ -14,7 +14,7 @@ export default function PharseSecton({
   pageStep,
   setPageStep,
   pharseVals,
-  pass
+  pass,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,6 +26,22 @@ export default function PharseSecton({
     setPharseValues(pharseVals);
   }, [pharseVals]);
 
+  const onPaste = (event) => {
+    const pasted = event.clipboardData.getData("text/plain");
+    setPharseValues(pasted.split(" ").slice(0, pharseValues.length));
+  };
+
+  const handleChange = (e, i) => {
+    console.log("", e.target.value);
+    let value = e.target.value;
+    if (value.split(" ").length > 1) {
+      return;
+    }
+    pharseValues[i] = value;
+
+    setPharseValues([...pharseValues]);
+  };
+
   const InputField = (pharseVal, i) => {
     return (
       <div className="col-4 mt-3 oslo-form" key={i}>
@@ -33,10 +49,8 @@ export default function PharseSecton({
           className="secure-input"
           type="text"
           value={pharseVal}
-          onChange={(e) => {
-            pharseValues[i] = e.target.value;
-            setPharseValues([...pharseValues]);
-          }}
+          onChange={(e) => handleChange(e, i)}
+          onPaste={(e) => onPaste(e)}
         />
       </div>
     );
@@ -51,18 +65,18 @@ export default function PharseSecton({
 
   const handleSubmit = ({ password }) => {
     const pharseStr = pharseValues.join(" ");
-      // cloth job renew soul range equal agent device decade give carbon project
-      const account = generateAccount(pharseStr); // account object contains--> address, privateKey, seedPhrase, balance
+    // cloth job renew soul range equal agent device decade give carbon project
+    const account = generateAccount(pharseStr); // account object contains--> address, privateKey, seedPhrase, balance
 
-      if (account) {
-        const address = account.account.address
-        var pharseText = CryptoJS.AES.encrypt(pharseStr, password).toString();
-        var secret = CryptoJS.AES.encrypt(password, address).toString();
-        window.localStorage.setItem("address", address);
-        window.localStorage.setItem("pharse", pharseText);
-        window.localStorage.setItem("secret", secret);
-        window.localStorage.setItem("loginType", "success");
-      }
+    if (account) {
+      const address = account.account.address;
+      var pharseText = CryptoJS.AES.encrypt(pharseStr, password).toString();
+      var secret = CryptoJS.AES.encrypt(password, address).toString();
+      window.localStorage.setItem("address", address);
+      window.localStorage.setItem("pharse", pharseText);
+      window.localStorage.setItem("secret", secret);
+      window.localStorage.setItem("loginType", "success");
+    }
     if (pageStep === 4) {
       setPageStep(5);
     } else {
@@ -121,8 +135,8 @@ export default function PharseSecton({
       {walletPage === "exist" && (
         <div className="pt-4 oslo-form">
           <Password
-            onSubmit={({ password }) => {          
-              handleSubmit({password})
+            onSubmit={({ password }) => {
+              handleSubmit({ password });
             }}
             btnLabel={"Submit"}
             section={"recovery_phrase"}
@@ -132,7 +146,10 @@ export default function PharseSecton({
       {pageStep === 4 && (
         <div className="row justify-content-center mt-5">
           <div className="col-12 col-md-10 col-lg-8">
-            <Button label="Submit" onClick={() => handleSubmit({password: pass})} />
+            <Button
+              label="Submit"
+              onClick={() => handleSubmit({ password: pass })}
+            />
           </div>
         </div>
       )}

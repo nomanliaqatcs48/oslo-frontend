@@ -25,6 +25,7 @@ export const GlobalStyles = createGlobalStyle`
     gap: 10px;
     border-radius: 16px;
     background: ${({ theme }) => theme.cardBg} !important;
+    min-height: 50vh;
   }
 
   .table-header td {

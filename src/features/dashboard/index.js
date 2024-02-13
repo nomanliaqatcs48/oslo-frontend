@@ -36,7 +36,9 @@ export default function Dashboard() {
   useEffect(() => {
     const addreess = localStorage.getItem("address");
     const loginType = localStorage.getItem("loginType");
-    !addreess || loginType === 'lock' && navigate("/login")
+    if(!addreess || !loginType || loginType === 'lock') { 
+      navigate("/login")
+  }
     setActiveTab(window.location.pathname.split("/")[1]);
   }, []);
   return (
@@ -55,7 +57,7 @@ export default function Dashboard() {
           <div className="mt-4">
             <Header page="dashboard" />
             {activeTab === "dashboard" && <Send balance={balance} fetchData={fetchData} />}
-            {activeTab === "history" && <TransactionHistory />}
+            {activeTab === "history" && <TransactionHistory address={localStorage.getItem("address")}/>}
           </div>
         </div>
       </div>
