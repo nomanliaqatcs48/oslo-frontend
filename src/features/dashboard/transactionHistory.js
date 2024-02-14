@@ -85,12 +85,13 @@ export default function SendTransaction({ address }) {
     let filterTransactions;
     if (name === "id") {
       setSearchVal(value);
-
+      setDate("")
       filterTransactions = originalTransactionsList.filter((transaction) =>
         transaction.hash.includes(value)
       );
     } else if (name === "date") {
       setDate(value);
+      setSearchVal("");
       filterTransactions = originalTransactionsList.filter((transaction) =>
         moment(moment(transaction.timestamp).format("YYYY-MM-DD")).isSame(value)
       );
