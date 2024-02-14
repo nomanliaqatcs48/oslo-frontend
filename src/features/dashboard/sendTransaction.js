@@ -227,7 +227,7 @@ export default function SendTransaction({ balance, fetchData }) {
                           {loading && (
                             <div className="spinner-loading">
                               <Spinner
-                                animation="grow"
+                                animation="border"
                                 style={{ height: "7rem", width: "7rem" }}
                                 variant="dark"
                               />

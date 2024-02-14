@@ -147,4 +147,10 @@ export const GlobalStyles = createGlobalStyle`
     top: 50%;
     left: 55%;
   }
+
+  .spinner-loading-list {
+    position: absolute; 
+    top: 68%;
+    left: 57%;
+  }
   `;
