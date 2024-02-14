@@ -19,6 +19,7 @@ export default function SendTransaction({ address }) {
   const [sentTransactions, setSentTransactions] = useState(0.0);
   const [recieveTransactions, setRecieveTransactions] = useState(0.0);
   const [isLoading, setIsLoading] = useState(false);
+  const [date, setDate] = useState("");
   const convertRate = 1000000000000000000;
 
   const totalSentTransactions = (items) => {
@@ -79,44 +80,45 @@ export default function SendTransaction({ address }) {
     getTransactions();
   }, []);
 
-  const onSearch = (e) => {
+  const onSearch = (e, name) => {
     const value = e.target.value;
-    setSearchVal(value);
-    const filterTransactions = originalTransactionsList.filter((transaction) =>
-      transaction.hash.includes(value)
-    );
+    let filterTransactions;
+    if (name === "id") {
+      setSearchVal(value);
+
+      filterTransactions = originalTransactionsList.filter((transaction) =>
+        transaction.hash.includes(value)
+      );
+    } else if (name === "date") {
+      setDate(value);
+      filterTransactions = originalTransactionsList.filter((transaction) =>
+        moment(moment(transaction.timestamp).format("YYYY-MM-DD")).isSame(value)
+      );
+    }
     setTransactionsList(filterTransactions);
   };
 
-  const inputField = ({
-    name,
-    value,
-    placeholder,
-    type,
-    onChange,
-    options,
-  }) => {
+  const inputField = ({ label, name, value, placeholder, type, onChange }) => {
     return (
-      <>
-        {type === "text" && (
-          <Form.Control
-            type={type ?? "text"}
-            name={name}
-            placeholder={placeholder}
-            value={value}
-            required
-            className="mr-3"
-            onChange={onChange}
-          />
-        )}
-        {type === "select" && (
+      <div className="d-block w-100 ">
+        <label className="mb-1">{label}</label>
+        <Form.Control
+          type={type ?? "text"}
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          required
+          className="mr-3"
+          onChange={onChange}
+        />
+        {/* {type === "select" && (
           <Form.Select className="mr-3" value={value} onChange={onChange}>
             {options.map((option) => (
               <option value={option.id}>{option.label}</option>
             ))}
           </Form.Select>
-        )}
-      </>
+        )} */}
+      </div>
     );
   };
 
@@ -170,21 +172,30 @@ export default function SendTransaction({ address }) {
                 setActiveBtn={(btn) => setActiveBtn(btn)}
               />
             </div> */}
-            <div className="d-flex p-4 justify-content-between oslo-form">
+            <div
+              className="d-flex p-4 justify-content-between oslo-form"
+              style={{ gap: "2rem" }}
+            >
               {inputField({
+                label: "Search By Transaction ID",
                 name: "search",
                 value: searchVal,
                 placeholder: "Search By Transaction ID",
                 type: "text",
-                onChange: (e) => onSearch(e),
+                onChange: (e) => onSearch(e, "id"),
               })}
               {inputField({
-                name: "time",
-                value: "",
-                placeholder: "Time",
-                type: "select",
-                options: [],
+                label: "Search By Date",
+                name: "date",
+                value: date,
+                onChange: (e) => onSearch(e, "date"),
+                placeholder: "Select Date",
+                type: "date",
               })}
+              {/* <div className="w-50 d-grid">
+              <DatePicker selected={date} onChange={(date) => setDate(date)} className="w-100" />
+              </div> */}
+
               {/* {inputField({
                 name: "status",
                 value: status,
