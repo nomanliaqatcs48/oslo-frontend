@@ -14,7 +14,7 @@ import { generateAccount } from "../../wallet-utils/AccountUtils";
 import RecieveTransaction from "./recieveTransaction";
 var CryptoJS = require("crypto-js");
 
-export default function SendTransaction({ balance, fetchData }) {
+export default function SendTransaction({ balance, fetchData, address }) {
   const [success, setSuccess] = useState(false);
   const [activeBtn, setActiveBtn] = useState("send");
   const [loading, setLoading] = useState(false);
@@ -135,11 +135,13 @@ export default function SendTransaction({ balance, fetchData }) {
                 {activeBtn === "send" ? (
                   <Formik
                     initialValues={{
-                      send_from: localStorage.getItem("address"),
+                      send_from: address,
                       send_to: "",
+                      secret_key: "",
                       asset: "oslo",
                       amount: null,
                     }}
+                    enableReinitialize
                     validationSchema={Yup.object({
                       send_from: Yup.string().required(
                         "This field is required."
@@ -193,6 +195,17 @@ export default function SendTransaction({ balance, fetchData }) {
                               value: values.send_to,
                               placeholder:
                                 "Enter public address (0x) or ENS name",
+                              type: "text",
+                              onChange: handleChange,
+                              errors,
+                              touched,
+                            })}
+                             {lableInput({
+                              label: "Secret Key",
+                              name: "secret_key",
+                              value: values.secret_key,
+                              placeholder:
+                                "Enter the secret key",
                               type: "text",
                               onChange: handleChange,
                               errors,

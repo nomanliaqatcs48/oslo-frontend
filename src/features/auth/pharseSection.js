@@ -67,14 +67,17 @@ export default function PharseSecton({
     const pharseStr = pharseValues.join(" ");
     // cloth job renew soul range equal agent device decade give carbon project
     const account = generateAccount(pharseStr); // account object contains--> address, privateKey, seedPhrase, balance
-
+    
     if (account) {
-      const address = account.account.address;
-      var pharseText = CryptoJS.AES.encrypt(pharseStr, password).toString();
+      const { address, privateKey } = account.account;
+      var secretKey = CryptoJS.AES.encrypt(privateKey, password).toString();
       var secret = CryptoJS.AES.encrypt(password, address).toString();
-      window.localStorage.setItem("address", address);
-      window.localStorage.setItem("pharse", pharseText);
-      window.localStorage.setItem("secret", secret);
+      window.localStorage.setItem(
+        "address1",
+        JSON.stringify({ address, secretKey, secret })
+      );
+      window.localStorage.setItem("addressesList", JSON.stringify([address]));
+      window.localStorage.setItem("selectAddress", "address1");
       window.localStorage.setItem("loginType", "success");
     }
     if (pageStep === 4) {

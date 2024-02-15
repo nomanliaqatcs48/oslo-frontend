@@ -153,4 +153,8 @@ export const GlobalStyles = createGlobalStyle`
     top: 68%;
     left: 57%;
   }
+
+  .modal-width {
+    max-width: 670px;
+  }
   `;

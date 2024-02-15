@@ -13,10 +13,7 @@ export default function LockPassword({setLoginType}) {
   const navigate = useNavigate();
   const [passView, setPassView] = useState(false);
   const forgotPassword = () => {
-    window.localStorage.removeItem("address");
-    window.localStorage.removeItem("loginType");
-    window.localStorage.removeItem("pharse");
-    window.localStorage.removeItem("secret");
+    localStorage.clear()
     setLoginType();
   };
   return (
@@ -38,12 +35,13 @@ export default function LockPassword({setLoginType}) {
         })}
         onSubmit={(values) => {
           const { password } = values;
-          let pharse = window.localStorage.getItem("pharse");
-          let address = window.localStorage.getItem("address");
-          pharse = CryptoJS.AES.decrypt(pharse, password);
+          let selectAddress = window.localStorage.getItem("selectAddress");
+          let address = window.localStorage.getItem(selectAddress);
+          address = JSON.parse(address);
+          let secretKey = CryptoJS.AES.decrypt(address.secretKey, password);
           try {
-            pharse = pharse.toString(CryptoJS.enc.Utf8);
-            if (pharse) {
+            secretKey = secretKey.toString(CryptoJS.enc.Utf8);
+            if (secretKey) {
               window.localStorage.setItem("loginType", "success");
               let secret = CryptoJS.AES.encrypt(password, address).toString();
               window.localStorage.setItem("secret", secret);

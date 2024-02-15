@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { clearState } from "../../features/product/product.slice";
 import Logo from "../../assets/logo.svg";
 import "./Sidebar.css";
 
@@ -8,18 +7,15 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onSignOut = () => {
-    window.localStorage.removeItem("address");
-    window.localStorage.removeItem("loginType");
-    window.localStorage.removeItem("pharse");
-    window.localStorage.removeItem("secret");
-    dispatch(clearState());
+   localStorage.clear()
+    // dispatch(clearState());
     navigate("/login");
   };
 
   const onLock = () => {
     window.localStorage.setItem("loginType", "lock");
     window.localStorage.removeItem("secret");
-    dispatch(clearState());
+    // dispatch(clearState());
     navigate("/login");
   };
 

@@ -1,11 +1,13 @@
+import React from 'react';
 import Form from "react-bootstrap/Form";
 import { useSelector, useDispatch } from "react-redux";
 import Logo from "../../assets/logo.svg";
 import LightThemeSVG from "../../assets/lightTheme.svg";
 import DarkThemeSVG from "../../assets/darkTheme.svg";
 import { setTheme } from "./theme.slice";
+import Button from "../Button";
 
-export default function Header({ page }) {
+export default function Header({ page, openModal, selectedAddress, setSelectedAddress }) {
   const dispatch = useDispatch();
 
   const { theme } = useSelector((state) => state.theme);
@@ -21,9 +23,31 @@ export default function Header({ page }) {
           )}
           <div className="ml-auto d-flex oslo-form">
             {page === "dashboard" && (
-              <Form.Select style={{ width: 300, marginRight: 15 }}>
-                <option>{window.localStorage.getItem("address")}</option>
-              </Form.Select>
+              <>
+                <Form.Select
+                  style={{ width: 430, marginRight: 15 }}
+                  value={selectedAddress}
+                  onChange={(e) => {
+                    console.log("e.target.value", e.target.value);
+                    const value = e.target.value;
+                    setSelectedAddress(value);
+                    localStorage.setItem("selectAddress", value);
+                  }}
+                >
+                  {JSON.parse(window.localStorage.getItem("addressesList")).map(
+                    (address, i) => (
+                      <option value={`address${i + 1}`}>{address}</option>
+                    )
+                  )}
+                </Form.Select>
+                <div style={{ width: 150, marginInline: "1.5rem 2rem" }}>
+                  <Button
+                    label={"+ New Address"}
+                    onClick={() => openModal()}
+                    type="button"
+                  />
+                </div>
+              </>
             )}
             <img
               src={theme === "light" ? LightThemeSVG : DarkThemeSVG}
