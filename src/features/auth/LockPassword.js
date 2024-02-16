@@ -43,8 +43,8 @@ export default function LockPassword({setLoginType}) {
             secretKey = secretKey.toString(CryptoJS.enc.Utf8);
             if (secretKey) {
               window.localStorage.setItem("loginType", "success");
-              let secret = CryptoJS.AES.encrypt(password, address).toString();
-              window.localStorage.setItem("secret", secret);
+              // let secret = CryptoJS.AES.encrypt(password, address.address).toString();
+              // window.localStorage.setItem("secret", secret);
               navigate("/dashboard");
             } else {
               toast.error("Please enter the correct password", {

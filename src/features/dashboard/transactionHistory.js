@@ -9,7 +9,7 @@ import OsloBtn from "./osloBtn";
 
 import { sendToken } from "../../wallet-utils/TransactionUtils";
 
-export default function SendTransaction({ address }) {
+export default function TransactionHistory({ address }) {
   const [activeBtn, setActiveBtn] = useState("send");
   const [transactionsList, setTransactionsList] = useState([]);
   const [originalTransactionsList, setOriginalTransactionsList] = useState([]);
@@ -78,7 +78,7 @@ export default function SendTransaction({ address }) {
 
   useEffect(() => {
     getTransactions();
-  }, []);
+  }, [address]);
 
   const onSearch = (e, name) => {
     const value = e.target.value;

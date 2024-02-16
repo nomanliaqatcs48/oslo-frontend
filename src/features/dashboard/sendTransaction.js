@@ -137,7 +137,6 @@ export default function SendTransaction({ balance, fetchData, address }) {
                     initialValues={{
                       send_from: address,
                       send_to: "",
-                      secret_key: "",
                       asset: "oslo",
                       amount: null,
                     }}
@@ -200,17 +199,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
                               errors,
                               touched,
                             })}
-                             {lableInput({
-                              label: "Secret Key",
-                              name: "secret_key",
-                              value: values.secret_key,
-                              placeholder:
-                                "Enter the secret key",
-                              type: "text",
-                              onChange: handleChange,
-                              errors,
-                              touched,
-                            })}
+                             
                             {lableInput({
                               label: "Asset",
                               name: "asset",

@@ -26,6 +26,7 @@ export default function Dashboard() {
     const chain = CHAINS_CONFIG[mainnet.chainId];
     const provider = new ethers.providers.JsonRpcProvider(chain.rpcUrl);
     let selectAddress = window.localStorage.getItem("selectAddress");
+    setSelectedAddress(selectAddress)
     let address = window.localStorage.getItem(selectAddress);
     address = JSON.parse(address);
     setPublicAddress(address.address);
@@ -42,6 +43,8 @@ export default function Dashboard() {
   useEffect(() => {
     fetchData();
   }, [selectedAddress]);
+
+
 
   useEffect(() => {
     const addreess = localStorage.getItem("address1");
@@ -101,7 +104,7 @@ export default function Dashboard() {
               <Send balance={balance} fetchData={fetchData} address={publicAddress}  />
             )}
             {activeTab === "history" && (
-              <TransactionHistory address={localStorage.getItem("address")} />
+              <TransactionHistory address={publicAddress} />
             )}
           </div>
         </div>

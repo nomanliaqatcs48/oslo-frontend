@@ -9,7 +9,7 @@ import Button from "../Button";
 
 export default function Header({ page, openModal, selectedAddress, setSelectedAddress }) {
   const dispatch = useDispatch();
-
+  
   const { theme } = useSelector((state) => state.theme);
 
   return (
