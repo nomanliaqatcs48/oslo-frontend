@@ -218,7 +218,7 @@ export default function TransactionHistory({ address }) {
               </thead>
               <tbody>
                 {!isLoading ? (
-                  transactionsList.length > 0 ? (
+                  transactionsList?.length > 0 ? (
                     transactionsList.map((transaction, i) => (
                       <tr className="table-header" key={i}>
                         <td align="center">{transaction.hash}</td>

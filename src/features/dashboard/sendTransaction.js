@@ -241,7 +241,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
                   </Formik>
                 ) : (
                   <RecieveTransaction
-                    address={localStorage.getItem("address")}
+                    address={address}
                   />
                 )}
               </div>
