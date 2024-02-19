@@ -111,13 +111,11 @@ h1 {
 
 .nav_end_link {
   display: flex;
- padding: 9px 50px 8px 50px;
-}
-
-.nav_end_lock_link {
-  display: flex;
- padding: 9px 62px 8px 64px;
- margin-bottom: 20px;
+  width: 200px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .nav_logo:hover,

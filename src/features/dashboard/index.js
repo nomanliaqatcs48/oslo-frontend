@@ -8,6 +8,7 @@ import TransactionHistory from "./transactionHistory";
 import { ethers } from "ethers";
 import { CHAINS_CONFIG, mainnet } from "../../wallet-utils/Chain";
 import AddNetworkModal from "./addNetworkModal";
+import GetPrivateKeyModal from "./getPrivateKeyModal";
 import {
   generateAccount,
   generateAccountWithSecretKey,
@@ -19,14 +20,15 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [balance, setBalance] = useState("0.00");
   const [showModal, setShowModal] = useState(false);
+  const [showSecretModal, setShowSecretModal] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
-  const [publicAddress, setPublicAddress] = useState("")
+  const [publicAddress, setPublicAddress] = useState("");
 
   const fetchData = async () => {
     const chain = CHAINS_CONFIG[mainnet.chainId];
     const provider = new ethers.providers.JsonRpcProvider(chain.rpcUrl);
     let selectAddress = window.localStorage.getItem("selectAddress");
-    setSelectedAddress(selectAddress)
+    setSelectedAddress(selectAddress);
     let address = window.localStorage.getItem(selectAddress);
     address = JSON.parse(address);
     setPublicAddress(address.address);
@@ -44,12 +46,17 @@ export default function Dashboard() {
     fetchData();
   }, [selectedAddress]);
 
-
+  const getAddressAccount = (pharseValues) => {
+    const pharseStr = pharseValues.join(" ");
+    // cloth job renew soul range equal agent device decade give carbon project
+    const account = generateAccount(pharseStr); // account object contains--> address, privateKey, seedPhrase, balance
+    return account;
+  };
 
   useEffect(() => {
     const addreess = localStorage.getItem("address1");
     const loginType = localStorage.getItem("loginType");
-    const data = JSON.parse(addreess)
+    const data = JSON.parse(addreess);
     if (!data.address || !loginType || loginType === "lock") {
       navigate("/login");
     }
@@ -59,17 +66,22 @@ export default function Dashboard() {
   const addNewNetwork = (data) => {
     const { pharseValues, secret_key, password, merchant_account } = data;
     let account;
-    const pharseStr = pharseValues.join(" ");
+
     if (secret_key) {
       account = generateAccountWithSecretKey(secret_key);
     } else {
-      // cloth job renew soul range equal agent device decade give carbon project
-      account = generateAccount(pharseStr); // account object contains--> address, privateKey, seedPhrase, balance
+      account = getAddressAccount(pharseValues);
     }
     if (account) {
       let addressesList = window.localStorage.getItem("addressesList");
-      addressesList = JSON.parse(addressesList)
+      addressesList = JSON.parse(addressesList);
       const { address, privateKey } = account.account;
+      if(addressesList.includes(address)){
+        toast.error("This address is already added!", {
+          theme: "colored",
+        });
+        return
+      }
       var secretKey = CryptoJS.AES.encrypt(privateKey, password).toString();
       var secret = CryptoJS.AES.encrypt(password, address).toString();
       window.localStorage.setItem(
@@ -77,7 +89,10 @@ export default function Dashboard() {
         JSON.stringify({ address, secretKey, secret })
       );
       addressesList.push(address);
-      window.localStorage.setItem("addressesList", JSON.stringify(addressesList));
+      window.localStorage.setItem(
+        "addressesList",
+        JSON.stringify(addressesList)
+      );
       setShowModal(false);
       toast.success("New address successfully added!", {
         theme: "colored",
@@ -95,13 +110,23 @@ export default function Dashboard() {
           <Sidebar
             activeTab={activeTab}
             setActiveTab={(tab) => setActiveTab(tab)}
+            showSecretModal={() => setShowSecretModal(true)}
           />
         </div>
         <div className="col-8 col-md-10 col-lg-10">
           <div className="mt-4">
-            <Header page="dashboard" openModal={() => setShowModal(true)} selectedAddress={selectedAddress} setSelectedAddress={adddress => setSelectedAddress(adddress)} />
+            <Header
+              page="dashboard"
+              openModal={() => setShowModal(true)}
+              selectedAddress={selectedAddress}
+              setSelectedAddress={(adddress) => setSelectedAddress(adddress)}
+            />
             {activeTab === "dashboard" && (
-              <Send balance={balance} fetchData={fetchData} address={publicAddress}  />
+              <Send
+                balance={balance}
+                fetchData={fetchData}
+                address={publicAddress}
+              />
             )}
             {activeTab === "history" && (
               <TransactionHistory address={publicAddress} />
@@ -112,6 +137,11 @@ export default function Dashboard() {
           show={showModal}
           handleClose={() => setShowModal(false)}
           handleSubmit={(data) => addNewNetwork(data)}
+        />
+        <GetPrivateKeyModal
+          show={showSecretModal}
+          handleClose={() => setShowSecretModal(false)}
+          getAddressAccount={(pharseValues) => getAddressAccount(pharseValues)}
         />
       </div>
     </div>

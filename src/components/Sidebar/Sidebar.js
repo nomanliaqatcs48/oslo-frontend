@@ -1,11 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import Logo from "../../assets/logo.svg";
 import "./Sidebar.css";
 
-export const Sidebar = ({ activeTab, setActiveTab }) => {
+export const Sidebar = ({ activeTab, setActiveTab, showSecretModal }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const onSignOut = () => {
    localStorage.clear()
     // dispatch(clearState());
@@ -51,7 +49,11 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
             </div>
           </div>
           <div className="nav_link">
-          <li onClick={onLock} className="nav_end_lock_link active" role="button">
+          <li onClick={showSecretModal} className="nav_end_link active" role="button">
+            <i className="bi bi-key mr-2"></i>
+            <span className="nav_name">Private Key</span>
+          </li>
+          <li onClick={onLock} className="nav_end_link active" role="button">
             <i className="bi bi-lock mr-2"></i>
             <span className="nav_name">Lock</span>
           </li>

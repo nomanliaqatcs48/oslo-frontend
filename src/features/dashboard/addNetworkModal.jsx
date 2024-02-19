@@ -7,7 +7,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Button from "../../components/Button";
 
 export default function AddNetworkModal({
-  show = true,
+  show,
   handleClose,
   handleSubmit,
 }) {
@@ -16,15 +16,13 @@ export default function AddNetworkModal({
   const [pharseValues, setPharseValues] = useState([]);
 
   useEffect(() => {
-    if (pharseValues.length === 0) {
       let pharses = [];
       for (let i = 1; i <= 12; i++) {
         const item = "";
         pharses.push(item);
       }
       setPharseValues(pharses);
-    }
-  }, []);
+  }, [show]);
 
   const onPaste = (event) => {
     const pasted = event.clipboardData.getData("text/plain");
