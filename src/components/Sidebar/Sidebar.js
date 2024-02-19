@@ -51,7 +51,7 @@ export const Sidebar = ({ activeTab, setActiveTab, showSecretModal }) => {
           <div className="nav_link">
           <li onClick={showSecretModal} className="nav_end_link active" role="button">
             <i className="bi bi-key mr-2"></i>
-            <span className="nav_name">Private Key</span>
+            <span className="nav_name">Secret Key</span>
           </li>
           <li onClick={onLock} className="nav_end_link active" role="button">
             <i className="bi bi-lock mr-2"></i>
