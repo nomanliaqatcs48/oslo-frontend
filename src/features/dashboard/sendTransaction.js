@@ -74,15 +74,13 @@ export default function SendTransaction({ balance, fetchData, address }) {
     //   message: "",
     // });
     setLoading(true);
-    let pharse = window.localStorage.getItem("pharse");
-    let secret = window.localStorage.getItem("secret");
-    secret = CryptoJS.AES.decrypt(secret, accountAddress);
-    secret = secret.toString(CryptoJS.enc.Utf8);
-    pharse = CryptoJS.AES.decrypt(pharse, secret);
-    pharse = pharse.toString(CryptoJS.enc.Utf8);
-    console.log(pharse);
-
-    const accountInfo = generateAccount(pharse);
+    let selectAddress = window.localStorage.getItem("selectAddress");
+    let address = window.localStorage.getItem(selectAddress);
+    address = JSON.parse(address);
+    let password = CryptoJS.AES.decrypt(address.secret, address.address);
+    password = password.toString(CryptoJS.enc.Utf8);
+    let privateKey = CryptoJS.AES.decrypt(address.secretKey, password);
+    privateKey = privateKey.toString(CryptoJS.enc.Utf8);
 
     try {
       setData({ amount, destinationAddress });
@@ -90,7 +88,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
         parseFloat(amount),
         accountAddress,
         destinationAddress,
-        accountInfo.account.privateKey
+        privateKey
       );
 
       if (receipt.status === 1) {
