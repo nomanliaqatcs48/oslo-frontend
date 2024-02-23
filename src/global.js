@@ -157,4 +157,8 @@ export const GlobalStyles = createGlobalStyle`
   .modal-width {
     max-width: 670px;
   }
+
+  .cursor-pointer {
+    cursor: pointer !important;
+  }
   `;

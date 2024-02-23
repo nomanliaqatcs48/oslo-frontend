@@ -42,7 +42,7 @@ export default function Header({ page, openModal, selectedAddress, setSelectedAd
                 </Form.Select>
                 <div style={{ width: 150, marginInline: "1.5rem 2rem" }}>
                   <Button
-                    label={"+ New Address"}
+                    label={"+ New Account"}
                     onClick={() => openModal()}
                     type="button"
                   />

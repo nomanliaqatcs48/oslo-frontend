@@ -57,7 +57,7 @@ export default function AddNetworkModal({
   return (
     <Modal show={show} onHide={handleClose} dialogClassName="modal-width">
       <Modal.Header closeButton>
-        <Modal.Title>Add New Address</Modal.Title>
+        <Modal.Title>Add New Account</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Formik

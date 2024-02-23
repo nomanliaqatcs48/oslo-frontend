@@ -135,7 +135,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
                     initialValues={{
                       send_from: address,
                       send_to: "",
-                      asset: "oslo",
+                      // asset: "oslo",
                       amount: null,
                     }}
                     enableReinitialize
@@ -198,7 +198,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
                               touched,
                             })}
                              
-                            {lableInput({
+                            {/* {lableInput({
                               label: "Asset",
                               name: "asset",
                               value: "",
@@ -206,7 +206,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
                               type: "select",
                               options: [{ value: values.asset, label: "Oslo" }],
                               errors,
-                            })}
+                            })} */}
                             {lableInput({
                               label: "Amount",
                               name: "amount",

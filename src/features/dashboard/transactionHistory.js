@@ -85,7 +85,7 @@ export default function TransactionHistory({ address }) {
     let filterTransactions;
     if (name === "id") {
       setSearchVal(value);
-      setDate("")
+      setDate("");
       filterTransactions = originalTransactionsList.filter((transaction) =>
         transaction.hash.includes(value)
       );
@@ -212,6 +212,7 @@ export default function TransactionHistory({ address }) {
                 <tr className="table-header">
                   <th className="left-border-radius">Transaction ID</th>
                   <th>Amount</th>
+                  <th>Payment Status</th>
                   <th>Date</th>
                   <th className="right-border-radius">Status</th>
                 </tr>
@@ -227,6 +228,15 @@ export default function TransactionHistory({ address }) {
                           {(parseInt(transaction.value) / convertRate).toFixed(
                             2
                           )}
+                        </td>
+                        <td align="center">
+                          <b>
+                            {transaction?.to?.hash === address ? (
+                              <span style={{ color: "#18c7bc" }}>Received</span>
+                            ) : (
+                              <span style={{ color: "#c3b00a" }}>Sent</span>
+                            )}
+                          </b>
                         </td>
                         <td align="center">
                           {moment(transaction.timestamp).format("DD MMM, YYYY")}
