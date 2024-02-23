@@ -212,7 +212,7 @@ export default function TransactionHistory({ address }) {
                 <tr className="table-header">
                   <th className="left-border-radius">Transaction ID</th>
                   <th>Amount</th>
-                  <th>Payment Status</th>
+                  <th>Transaction Activity</th>
                   <th>Date</th>
                   <th className="right-border-radius">Status</th>
                 </tr>
