@@ -10,8 +10,8 @@ import Button from "../../components/Button";
 import Success from "./success";
 import OsloBtn from "./osloBtn";
 import { sendToken } from "../../wallet-utils/TransactionUtils";
-import { generateAccount } from "../../wallet-utils/AccountUtils";
 import RecieveTransaction from "./recieveTransaction";
+import ScanQRCodeModal from "./scanQRCodeModal";
 var CryptoJS = require("crypto-js");
 
 export default function SendTransaction({ balance, fetchData, address }) {
@@ -19,6 +19,9 @@ export default function SendTransaction({ balance, fetchData, address }) {
   const [activeBtn, setActiveBtn] = useState("send");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
+  const [isScanQRModal, setIsScanQRModal] = useState(false);
+  const [sendToAddress, setSendAddress] = useState("");
+
   const lableInput = ({
     label,
     name,
@@ -33,7 +36,14 @@ export default function SendTransaction({ balance, fetchData, address }) {
   }) => {
     return (
       <div className="mt-3 oslo-form">
-        <Text label={label} size={16} weight={600} className="mb-1" />
+        {name === "send_to" ? (
+          <div className="w-100 d-flex justify-content-between">
+            <Text label={label} size={16} weight={600} className="mb-1" />
+            <a href="Javascript:void(0)" style={{color: "#d2a63b", fontWeight: 600}} onClick={() => setIsScanQRModal(true)}>Scan QR Code</a>
+          </div>
+        ) : (
+          <Text label={label} size={16} weight={600} className="mb-1" />
+        )}
         {type === "text" && (
           <InputGroup>
             <Form.Control
@@ -94,6 +104,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
       if (receipt.status === 1) {
         console.log(receipt);
         setSuccess(!success);
+        setSendAddress("")
         fetchData();
         setLoading(false);
         return;
@@ -123,7 +134,11 @@ export default function SendTransaction({ balance, fetchData, address }) {
                 <Text label="Send & Receive" size={24} weight={700} />
               </div>
               <div className="total-oslo mt-2">
-                <Text label={`OSLO ${parseInt(balance).toFixed(2)}`} size={38} weight={600} />
+                <Text
+                  label={`OSLO ${parseInt(balance).toFixed(2)}`}
+                  size={38}
+                  weight={600}
+                />
               </div>
               <div className="oslo-card mt-3">
                 <OsloBtn
@@ -134,7 +149,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
                   <Formik
                     initialValues={{
                       send_from: address,
-                      send_to: "",
+                      send_to: sendToAddress,
                       // asset: "oslo",
                       amount: null,
                     }}
@@ -186,6 +201,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
                               errors,
                               touched,
                             })}
+                            <ScanQRCodeModal />
                             {lableInput({
                               label: "Send To",
                               name: "send_to",
@@ -197,7 +213,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
                               errors,
                               touched,
                             })}
-                             
+
                             {/* {lableInput({
                               label: "Asset",
                               name: "asset",
@@ -238,14 +254,13 @@ export default function SendTransaction({ balance, fetchData, address }) {
                     }}
                   </Formik>
                 ) : (
-                  <RecieveTransaction
-                    address={address}
-                  />
+                  <RecieveTransaction address={address} />
                 )}
               </div>
             </>
           )}
         </div>
+        <ScanQRCodeModal show={isScanQRModal} handleClose={() => setIsScanQRModal(false)} setSendAddress={(address) => setSendAddress(address)} />
       </div>
     </div>
   );
