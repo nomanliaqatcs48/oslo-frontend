@@ -120,6 +120,7 @@ export default function Dashboard() {
               openModal={() => setShowModal(true)}
               selectedAddress={selectedAddress}
               setSelectedAddress={(adddress) => setSelectedAddress(adddress)}
+              addresses={JSON.parse(window.localStorage.getItem("addressesList"))}
             />
             {activeTab === "dashboard" && (
               <Send
