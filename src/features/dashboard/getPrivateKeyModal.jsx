@@ -39,8 +39,16 @@ export default function GetPrivateKeyModal({ show, handleClose, getAddressAccoun
 
   const onPaste = (event) => {
     
+    // const pasted = event.clipboardData.getData("text/plain");
+    // setPharseValues(pasted.split(" ").slice(0, pharseValues.length));
+    // setIsDisabledBtn(false)
+
     const pasted = event.clipboardData.getData("text/plain");
-    setPharseValues(pasted.split(" ").slice(0, pharseValues.length));
+    const pastedTextArr = pasted.split(" ").slice(0);
+    for (let i = 0; i < pastedTextArr.length; i++) {
+      pharseValues[i] = pastedTextArr[i];
+      setPharseValues([...pharseValues]);
+    }
     setIsDisabledBtn(false)
   };
 

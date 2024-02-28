@@ -27,8 +27,15 @@ export default function PharseSecton({
   }, [pharseVals]);
 
   const onPaste = (event) => {
+    // const pasted = event.clipboardData.getData("text/plain");
+    // setPharseValues(pasted.split(" ").slice(0, pharseValues.length));
+
     const pasted = event.clipboardData.getData("text/plain");
-    setPharseValues(pasted.split(" ").slice(0, pharseValues.length));
+    const pastedTextArr = pasted.split(" ").slice(0);
+    for (let i = 0; i < pastedTextArr.length; i++) {
+      pharseValues[i] = pastedTextArr[i];
+      setPharseValues([...pharseValues]);
+    }
   };
 
   const handleChange = (e, i) => {
@@ -101,6 +108,7 @@ export default function PharseSecton({
       <p className="content mt-2">Confirm Secret Recovery Phrase</p>
       <div className="seed-section">
         <div className="d-flex justify-content-between w-100">
+        {walletPage !== "exist" ? (
           <div
             className="d-flex cursor-pointer"
             onClick={() => dispatch(toggleSeedPharse(!pharse))}
@@ -112,7 +120,7 @@ export default function PharseSecton({
             <p className="typography-1 light-blue">
               {pharse ? "Show" : "Hide"} seed phrase
             </p>
-          </div>
+          </div>): (<div />)}
           <div className="d-flex cursor-pointer" onClick={copyToClipboard}>
             <i
               className="bi bi-clipboard-check-fill mr-2"

@@ -6,27 +6,28 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "../../components/Button";
 
-export default function AddNetworkModal({
-  show,
-  handleClose,
-  handleSubmit,
-}) {
+export default function AddNetworkModal({ show, handleClose, handleSubmit }) {
   const [passView, setPassView] = useState(false);
   const [cpassView, setCPassView] = useState(false);
   const [pharseValues, setPharseValues] = useState([]);
 
   useEffect(() => {
-      let pharses = [];
-      for (let i = 1; i <= 12; i++) {
-        const item = "";
-        pharses.push(item);
-      }
-      setPharseValues(pharses);
+    let pharses = [];
+    for (let i = 1; i <= 12; i++) {
+      const item = "";
+      pharses.push(item);
+    }
+    setPharseValues(pharses);
   }, [show]);
 
   const onPaste = (event) => {
     const pasted = event.clipboardData.getData("text/plain");
-    setPharseValues(pasted.split(" ").slice(0, pharseValues.length));
+    const pastedTextArr = pasted.split(" ").slice(0);
+    for (let i = 0; i < pastedTextArr.length; i++) {
+      pharseValues[i] = pastedTextArr[i];
+      setPharseValues([...pharseValues]);
+    }
+    // setPharseValues(pasted.split(" ").slice(0, pastedTextArr.length));
   };
 
   const handleChange = (e, i) => {
@@ -74,13 +75,24 @@ export default function AddNetworkModal({
               .required("This field is required."),
           })}
           onSubmit={(values) => {
-            const {password, secret_key, merchant_account} = values;
-            handleSubmit({ password: values.password, secret_key, merchant_account, pharseValues});
+            const { password, secret_key, merchant_account } = values;
+            handleSubmit({
+              password: values.password,
+              secret_key,
+              merchant_account,
+              pharseValues,
+            });
           }}
         >
           {(props) => {
-            const { setFieldValue, values, touched, errors, handleChange, handleSubmit } =
-              props;
+            const {
+              setFieldValue,
+              values,
+              touched,
+              errors,
+              handleChange,
+              handleSubmit,
+            } = props;
             return (
               <form onSubmit={handleSubmit} className="w-100">
                 <div className="row mb-4">
@@ -167,7 +179,12 @@ export default function AddNetworkModal({
                     id={"pass-term-checkbox"}
                     checked={values.merchant_account === "Y"}
                     name="merchant_account"
-                    onChange={e => setFieldValue('merchant_account', e.target.checked ? 'Y' : 'N')}
+                    onChange={(e) =>
+                      setFieldValue(
+                        "merchant_account",
+                        e.target.checked ? "Y" : "N"
+                      )
+                    }
                     label={
                       <p className="description">Is it a merchant account?</p>
                     }
