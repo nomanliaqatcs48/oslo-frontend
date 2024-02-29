@@ -14,7 +14,7 @@ export default function Step1({ setPageStep }) {
         does not have the capability to recover this password. Keep it secure
         for personalized access to your wallet.
       </p>
-      <div className="px-5 pt-3 oslo-form">
+      <div className="pass-px-5 px-sm-0 pt-3 oslo-form">
         <Password
           onSubmit={({password}) => setPageStep({page: 2, pass: password})}
           btnLabel={"Create New Wallet"}

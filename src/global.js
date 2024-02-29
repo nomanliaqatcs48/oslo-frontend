@@ -132,6 +132,9 @@ export const GlobalStyles = createGlobalStyle`
     border: 1px solid #bbb4a4;
     border-radius: 16px;
     margin-top: 2rem;
+    @media (max-width: 575px) {
+      padding: 10px 20px 10px 10px;
+    }
   }
 
   .forgot_link {

@@ -69,7 +69,7 @@ export default function Header({ page, openModal, selectedAddress, setSelectedAd
                     localStorage.setItem("selectAddress", value);
                   }}
                 >
-                  {addresses.map(
+                  {addresses.length > 0 && addresses.map(
                     (address, i) => (
                       <option value={`address${i + 1}`}>
                         <>

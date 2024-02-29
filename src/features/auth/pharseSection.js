@@ -51,7 +51,7 @@ export default function PharseSecton({
 
   const InputField = (pharseVal, i) => {
     return (
-      <div className="col-4 mt-3 oslo-form" key={i}>
+      <div className="col-6 col-md-4 col-lg-4 col-sm-4 mt-3 oslo-form" key={i}>
         <Form.Control
           className="secure-input"
           type="text"
@@ -137,7 +137,7 @@ export default function PharseSecton({
               </span>
             </div>
           )}
-          <div className={`${pharse && "alerting"} row`}>
+          <div className={`${pharse && "alerting"} row mb-3`}>
             {pharseValues.length > 0 &&
               pharseValues.map((pharseVal, i) => InputField(pharseVal, i))}
           </div>
