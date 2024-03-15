@@ -125,7 +125,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
   return (
     <div className="container">
       <div className="row">
-        <div className="m-auto col-12 col-md-9 col-lg-5">
+        <div className="m-auto col-12 col-md-10 col-lg-5">
           {success ? (
             <Success setSuccess={() => setSuccess(!success)} data={data} />
           ) : (

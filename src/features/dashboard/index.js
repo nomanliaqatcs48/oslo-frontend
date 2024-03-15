@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Sidebar } from "../../components/Sidebar/Sidebar";
+import { ResposiveSidebar } from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header";
 import Send from "./sendTransaction";
 import TransactionHistory from "./transactionHistory";
@@ -106,14 +106,16 @@ export default function Dashboard() {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-4 col-md-2 col-lg-2 sidebar">
-          <Sidebar
+        <div className="col-12 col-lg-2 sidebar">
+          <ResposiveSidebar
             activeTab={activeTab}
             setActiveTab={(tab) => setActiveTab(tab)}
             showSecretModal={() => setShowSecretModal(true)}
+            openModal={() => setShowModal(true)}
+            page="dashboard"
           />
         </div>
-        <div className="col-8 col-md-10 col-lg-10">
+        <div className="col-12 col-md-12 col-lg-10">
           <div className="mt-4">
             <Header
               page="dashboard"

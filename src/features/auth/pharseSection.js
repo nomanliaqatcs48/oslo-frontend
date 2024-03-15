@@ -137,7 +137,7 @@ export default function PharseSecton({
               </span>
             </div>
           )}
-          <div className={`${pharse && "alerting"} row mb-3`}>
+          <div className={`${pharse && "alerting"} row mb-3 mx-1`}>
             {pharseValues.length > 0 &&
               pharseValues.map((pharseVal, i) => InputField(pharseVal, i))}
           </div>

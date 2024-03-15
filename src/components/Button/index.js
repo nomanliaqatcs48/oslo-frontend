@@ -24,6 +24,10 @@ const CustomButton = styled.button`
   line-height: 24px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   opacity: ${(props) => (props.disabled ? 0.55 : 1)};
+  @media (max-width: 991px) {
+    padding: 6px 0px;
+    font-size: 0.9rem;
+  }
 `;
 
 function Button(props) {

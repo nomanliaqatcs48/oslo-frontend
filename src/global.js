@@ -17,15 +17,18 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .sidebar {
-    background-color: ${({ theme }) => theme.sidebarBg};
+    background-color: ${({ theme }) => theme.sidebarBg} !important;
   }
 
+  .modal-content {
+    background-color: ${({ theme }) => theme.sidebarBg} !important;
+  }
   .oslo-card {
     padding: 16px 24px 40px 24px;
     gap: 10px;
     border-radius: 16px;
     background: ${({ theme }) => theme.cardBg} !important;
-    min-height: 50vh;
+    min-height: 40vh;
   }
 
   .table-header td {
@@ -100,6 +103,10 @@ export const GlobalStyles = createGlobalStyle`
     align-items: center;
     border-radius: 8px;
     background: ${({ theme }) => theme.activeContentBg};
+    @media (max-width: 575px) {
+      padding: 16px;
+      font-size: 16px;
+    }
   }
 
   .active-step {
@@ -163,5 +170,27 @@ export const GlobalStyles = createGlobalStyle`
 
   .cursor-pointer {
     cursor: pointer !important;
+  }
+
+  .mb-5 {
+    margin-bottom: 3rem !important;
+    @media (max-width: 575px) {
+      margin-bottom: 1rem !important;
+    }
+  }
+  .p-4 {
+    padding: 1.5rem !important;
+    @media (max-width: 575px) {
+      padding: 1.5rem 1rem !important;
+    }
+  }
+
+  .address-select {  
+    width: 440px; 
+    margin-right: 15px;
+    @media (max-width: 991px) {
+      width: 100%;
+      margin-right: 0px;
+    }
   }
   `;

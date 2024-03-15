@@ -22,6 +22,9 @@
 
 .ml-auto {
   margin-left: auto !important;
+  @media (max-width: 991px) { 
+    margin: auto !important;
+  }
 }
 
 .mr-2 {
@@ -153,16 +156,6 @@
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-}
-
-.secure {
-  display: flex;
-  padding: 10px;
-  justify-content: center;
-  align-items: center;
-  /* gap: 10px; */
-  border-radius: 8px;
-  background: #f3ecdd;
 }
 
 .step-width {

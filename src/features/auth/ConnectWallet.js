@@ -36,7 +36,7 @@ export default function ConnectWallet({ setWalletPage }) {
             />
           </div>
 
-          <div className="row justify-content-center">
+          <div className="row justify-content-center px-4">
             <div className="col-12 col-md-6 col-lg-5">
               <Button
                 label="Create New Wallet"
