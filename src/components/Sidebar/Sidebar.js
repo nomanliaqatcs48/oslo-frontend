@@ -32,10 +32,14 @@ export const ResposiveSidebar = ({
     navigate("/login");
   };
 
+  const closeToggle = () => {
+    setToggled(false);
+  }
+
   return (
     <>
       <Sidebar
-        onBackdropClick={() => setToggled(false)}
+        onBackdropClick={closeToggle}
         toggled={toggled}
         breakPoint="lg"
         width={"270px"}
@@ -53,6 +57,7 @@ export const ResposiveSidebar = ({
                 onClick={() => {
                   navigate("/dashboard");
                   setActiveTab("dashboard");
+                  closeToggle();
                 }}
               >
                 <i className="bi bi-send-fill mr-2"></i>
@@ -65,6 +70,7 @@ export const ResposiveSidebar = ({
                 onClick={() => {
                   navigate("/history");
                   setActiveTab("history");
+                  closeToggle();
                 }}
               >
                 <i className="bi bi-clock-fill mr-2"></i>
@@ -102,9 +108,7 @@ export const ResposiveSidebar = ({
       </Sidebar>
       <div className="d-lg-none d-flex w-100 mt-3 mb-4 justify-content-between">
         <div onClick={() => setToggled(true)}>
-          {/* <img src={MenuIcon} alt="menu" /> */}
           <MenuIcon color={theme === "light" ? "#000000" : "#FFFFFF"} />
-          {/* <i className="fa-6x bi bi-list"></i> */}
         </div>
         <div className="d-flex">
           <AddNewAddressBtn openModal={() => openModal()} screen="mobile" />
