@@ -28,7 +28,7 @@ export const GlobalStyles = createGlobalStyle`
     gap: 10px;
     border-radius: 16px;
     background: ${({ theme }) => theme.cardBg} !important;
-    min-height: 40vh;
+    min-height: 50vh;
   }
 
   .table-header td {
@@ -191,6 +191,20 @@ export const GlobalStyles = createGlobalStyle`
     @media (max-width: 991px) {
       width: 100%;
       margin-right: 0px;
+    }
+  }
+
+  .not-found-msg {
+    position: absolute; 
+    left: 50%; 
+    bottom: 25%;
+    @media (max-width: 991px) {
+      left: 41%; 
+      bottom: -6rem;
+    }
+    @media (max-width: 575px) {
+      left: 38%; 
+      bottom: -1rem;
     }
   }
   `;

@@ -101,7 +101,7 @@ export default function TransactionHistory({ address }) {
 
   const inputField = ({ label, name, value, placeholder, type, onChange }) => {
     return (
-      <div className="d-block w-100 ">
+      <div className="col-12 col-md-6 col-lg-6 mb-3">
         <label className="mb-1">{label}</label>
         <Form.Control
           type={type ?? "text"}
@@ -125,7 +125,7 @@ export default function TransactionHistory({ address }) {
 
   const card = ({ label, value, background }) => {
     return (
-      <div className={`stats-card ${background}`}>
+      <div className={`stats-card ${background} col-12 col-md-4 col-lg-4`}>
         <Text label={label} size={14} weight={600} />
         <Text label={value} />
       </div>
@@ -139,7 +139,7 @@ export default function TransactionHistory({ address }) {
           <div className="text-center mb-4">
             <Text label="Transaction History" size={24} weight={700} />
           </div>
-          <div className="stats-section">
+          <div className="stats-section row">
             {card({
               label: "Total Transactions",
               value: totalTransactions.toFixed(2),
@@ -166,7 +166,7 @@ export default function TransactionHistory({ address }) {
               background: "total-failed-light",
             })} */}
           </div>
-          <div className="oslo-card mt-3">
+          <div className="oslo-card mt-3 container">
             {/* <div className="d-flex justify-content-center">
               <OsloBtn
                 activeBtn={activeBtn}
@@ -174,8 +174,8 @@ export default function TransactionHistory({ address }) {
               />
             </div> */}
             <div
-              className="d-flex p-4 justify-content-between oslo-form"
-              style={{ gap: "2rem" }}
+              className="row mb-3 mt-2 oslo-form"
+              // style={{ gap: "2rem" }}
             >
               {inputField({
                 label: "Search By Transaction ID",
@@ -206,14 +206,14 @@ export default function TransactionHistory({ address }) {
                 options: [{id: "ok", label: "Successful"}, {id: "failed", label: "Failed"}],
               })} */}
             </div>
-            <Table responsive="sm" hover>
+            <Table responsive hover>
               {/* variant="dark" */}
               <thead>
                 <tr className="table-header">
-                  <th className="left-border-radius">Transaction ID</th>
-                  <th>Amount</th>
-                  <th>Transaction Activity</th>
-                  <th>Date</th>
+                  <th className="left-border-radius"><div style={{width: 120}}>Transaction ID</div></th>
+                  <th><div style={{width: 100}}>Amount</div></th>
+                  <th><div style={{width: 160}}>Transaction Activity</div></th>
+                  <th><div style={{width: 100}}>Date</div></th>
                   <th className="right-border-radius">Status</th>
                 </tr>
               </thead>
@@ -248,8 +248,8 @@ export default function TransactionHistory({ address }) {
                     ))
                   ) : (
                     <h3
-                      className="text-center"
-                      style={{ position: "absolute", left: "53%", top: "70%" }}
+                      className="text-center not-found-msg"
+                      style={{  }}
                     >
                       Data not found!
                     </h3>
