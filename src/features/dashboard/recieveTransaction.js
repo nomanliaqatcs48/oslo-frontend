@@ -11,7 +11,9 @@ export default function recieveTransaction({ address }) {
   };
   return (
     <div className="text-center" style={{ marginBlock: "5rem 2rem" }}>
-      <QRCode value={address} />
+      <QRCode value={address}
+      constraints={{aspectRatio: 1,  facingMode: { ideal: "environment" } }}
+       />
       <div className="d-flex mt-5 justify-content-center">
         <p>{address}</p>
         <i className="bi bi-copy ms-2 cursor-pointer" onClick={copyToClipboard} style={{ color: "#cfb577" }}></i>
