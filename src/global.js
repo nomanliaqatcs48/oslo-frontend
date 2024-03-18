@@ -162,6 +162,10 @@ export const GlobalStyles = createGlobalStyle`
     position: absolute; 
     top: 68%;
     left: 57%;
+    @media (max-width: 575px) {
+      top: 42%; 
+      left: 38%;
+    }
   }
 
   .modal-width {
@@ -205,6 +209,12 @@ export const GlobalStyles = createGlobalStyle`
     @media (max-width: 575px) {
       left: 38%; 
       bottom: -1rem;
+    }
+  }
+
+  .address {
+    @media (max-width: 575px) {
+      font-size: 13px;
     }
   }
   `;

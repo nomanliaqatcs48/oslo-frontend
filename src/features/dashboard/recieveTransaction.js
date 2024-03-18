@@ -18,7 +18,7 @@ export default function recieveTransaction({ address }) {
       key="environment"
        />
       <div className="d-flex mt-5 justify-content-center">
-        <p>{address}</p>
+        <p className="address">{address}</p>
         <i className="bi bi-copy ms-2 cursor-pointer" onClick={copyToClipboard} style={{ color: "#cfb577" }}></i>
       </div>
     </div>
