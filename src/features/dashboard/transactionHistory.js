@@ -5,7 +5,6 @@ import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 import moment from "moment";
 import Text from "../../components/Text";
-import OsloBtn from "./osloBtn";
 
 import { sendToken } from "../../wallet-utils/TransactionUtils";
 

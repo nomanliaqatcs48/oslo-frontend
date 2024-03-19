@@ -12,6 +12,8 @@ import OsloBtn from "./osloBtn";
 import { sendToken } from "../../wallet-utils/TransactionUtils";
 import RecieveTransaction from "./recieveTransaction";
 import ScanQRCodeModal from "./scanQRCodeModal";
+import AddressBookModal from "./addressBookModal";
+
 var CryptoJS = require("crypto-js");
 
 export default function SendTransaction({ balance, fetchData, address }) {
@@ -20,6 +22,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   const [isScanQRModal, setIsScanQRModal] = useState(false);
+  const [isAddressBookModal, setIsAddressBookModal] = useState(true);
   const [sendToAddress, setSendAddress] = useState("");
 
   const lableInput = ({
@@ -39,7 +42,26 @@ export default function SendTransaction({ balance, fetchData, address }) {
         {name === "send_to" ? (
           <div className="w-100 d-flex justify-content-between">
             <Text label={label} size={16} weight={600} className="mb-1" />
-            <a href="Javascript:void(0)" style={{color: "#d2a63b", fontWeight: 600}} onClick={() => setIsScanQRModal(true)}>Scan QR Code</a>
+            <div>
+              <a
+                href="Javascript:void(0)"
+                style={{
+                  color: "#d2a63b",
+                  fontWeight: 600,
+                  marginRight: "1.5rem",
+                }}
+                onClick={() => setIsAddressBookModal(true)}
+              >
+                Address Books
+              </a>
+              <a
+                href="Javascript:void(0)"
+                style={{ color: "#d2a63b", fontWeight: 600 }}
+                onClick={() => setIsScanQRModal(true)}
+              >
+                Scan QR Code
+              </a>
+            </div>
           </div>
         ) : (
           <Text label={label} size={16} weight={600} className="mb-1" />
@@ -104,7 +126,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
       if (receipt.status === 1) {
         console.log(receipt);
         setSuccess(!success);
-        setSendAddress("")
+        setSendAddress("");
         fetchData();
         setLoading(false);
         return;
@@ -260,7 +282,12 @@ export default function SendTransaction({ balance, fetchData, address }) {
             </>
           )}
         </div>
-        <ScanQRCodeModal show={isScanQRModal} handleClose={() => setIsScanQRModal(false)} setSendAddress={(address) => setSendAddress(address)} />
+        <ScanQRCodeModal
+          show={isScanQRModal}
+          handleClose={() => setIsScanQRModal(false)}
+          setSendAddress={(address) => setSendAddress(address)}
+        />
+        <AddressBookModal show={isAddressBookModal} handleClose={() => setIsAddressBookModal(false)} />
       </div>
     </div>
   );

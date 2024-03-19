@@ -172,6 +172,10 @@ export const GlobalStyles = createGlobalStyle`
     max-width: 670px;
   }
 
+  .address-modal-width {
+    max-width: 700px;
+  }
+
   .cursor-pointer {
     cursor: pointer !important;
   }
