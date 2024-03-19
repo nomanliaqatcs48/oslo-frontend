@@ -22,7 +22,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   const [isScanQRModal, setIsScanQRModal] = useState(false);
-  const [isAddressBookModal, setIsAddressBookModal] = useState(true);
+  const [isAddressBookModal, setIsAddressBookModal] = useState(false);
   const [sendToAddress, setSendAddress] = useState("");
 
   const lableInput = ({
