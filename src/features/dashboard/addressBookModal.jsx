@@ -1,13 +1,104 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import { toast } from "react-toastify";
 import InputGroup from "react-bootstrap/InputGroup";
-import { Formik } from "formik";
+import { Formik, useFormikContext } from "formik";
 import * as Yup from "yup";
 import Table from "react-bootstrap/Table";
 import Button from "../../components/Button";
 
-export default function AddressBookModal({ show, handleClose }) {
+export default function AddressBookModal({
+  show,
+  handleClose,
+  selectedAddress,
+}) {
+  const formRef = useRef();
+  const [addressesList, setAddressesList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    getAddressesList();
+  }, []);
+
+  const getAddressesList = async () => {
+    setIsLoading(true);
+    await axios
+      .get(`/address/${selectedAddress}`)
+      .then((response) => {
+        setIsLoading(false);
+        setAddressesList(response.data.addresses);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.error(error);
+      });
+  };
+
+  const createAddress = async (params) => {
+    setIsLoading(true);
+    await axios
+      .post(`/address/create`, params)
+      .then((response) => {
+        if (response.data.status === "Success") {
+          toast.success("Data created successfully!", {
+            theme: "colored",
+          });
+          setIsLoading(false);
+          getAddressesList();
+        }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.error(error);
+      });
+  };
+
+  const updateAddress = async (params) => {
+    setIsLoading(true);
+    await axios
+      .put(`/address/update`, params)
+      .then((response) => {
+        if (response.data.status === "Success") {
+          toast.success("Record updated successfully!", {
+            theme: "colored",
+          });
+          setIsLoading(false);
+          getAddressesList();
+        }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.error(error);
+      });
+  };
+
+  const deleteAddress = async (id) => {
+    setIsLoading(true);
+    await axios
+      .delete(`/address/${id}`)
+      .then((response) => {
+        if (response.data.status === "Success") {
+          toast.success("Record deleted successfully!", {
+            theme: "colored",
+          });
+          setIsLoading(false);
+          getAddressesList();
+        }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.error(error);
+      });
+  };
+
+  const setFormValues = (item) => {
+    formRef.current.setFieldValue("id", item?._id);
+    formRef.current.setFieldValue("address", item?.address);
+    formRef.current.setFieldValue("name", item?.name);
+  }
+
   return (
     <Modal
       show={show}
@@ -19,18 +110,35 @@ export default function AddressBookModal({ show, handleClose }) {
       </Modal.Header>
       <Modal.Body className="mb-5">
         <Formik
+          innerRef={formRef} 
           initialValues={{
+            id:"",
             name: "",
-            address: "",
+            address: ""
           }}
           validationSchema={Yup.object({
             name: Yup.string().required("This field is required."),
             address: Yup.string().required("This field is required."),
           })}
-          onSubmit={(values) => {}}
+          enableReinitialize
+          onSubmit={(values, { resetForm }) => {
+            const { name, address, id } = values;
+            const params = {
+              address,
+              name,
+            };
+            if(id){
+              params["id"] = id;
+              updateAddress(params);
+            } else {
+              params["user_address"] = selectedAddress;
+              createAddress(params);
+            }
+            resetForm();
+          }}
         >
           {(props) => {
-            const { values, touched, errors, handleChange, handleSubmit } =
+            const { values, touched, errors, handleChange, handleSubmit, setFieldValue } =
               props;
             return (
               <form onSubmit={handleSubmit} className="w-100">
@@ -77,14 +185,14 @@ export default function AddressBookModal({ show, handleClose }) {
         <Table responsive hover>
           <thead>
             <tr className="table-header">
-              <th>
+              {/* <th>
                 <div style={{ width: 20 }}>#</div>
+              </th> */}
+              <th>
+                <div style={{ width: 100 }}>Name</div>
               </th>
               <th>
-                <div style={{ width: 80 }}>Name</div>
-              </th>
-              <th>
-                <div style={{ width: 100 }}>Address</div>
+                <div style={{ width: 120 }}>Address</div>
               </th>
               <th>
                 <div style={{ width: 80 }}>Action</div>
@@ -92,51 +200,27 @@ export default function AddressBookModal({ show, handleClose }) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td align="center">1</td>
-              <td align="center">Isbah Salabat</td>
-              <td align="center">0xA81082ea6fD0A99d56425daC010A5fC48b6044Cd</td>
-              <td align="center">
-                <i className="bi bi-pencil-square mr-2"></i>
-                <i className="bi bi-trash"></i>
-              </td>
-            </tr>
-            <tr>
-              <td align="center">2</td>
-              <td align="center">Raffay Ansari</td>
-              <td align="center">0xA81082ea6fD0A99d56425daC010A5fC48b6044Cd</td>
-              <td align="center">
-                <i className="bi bi-pencil-square mr-2"></i>
-                <i className="bi bi-trash"></i>
-              </td>
-            </tr>
-            <tr>
-              <td align="center">3</td>
-              <td align="center">Noman Liaqat</td>
-              <td align="center">0xA81082ea6fD0A99d56425daC010A5fC48b6044Cd</td>
-              <td align="center">
-                <i className="bi bi-pencil-square mr-2"></i>
-                <i className="bi bi-trash"></i>
-              </td>
-            </tr>
-            {/* ))
-                  ) : (
-                    <h3
-                      className="text-center not-found-msg"
-                      style={{  }}
-                    >
-                      Data not found!
-                    </h3>
-                  )
-                ) : (
-                  <div className="spinner-loading-list">
-                    <Spinner
-                      animation="border"
-                      style={{ height: "5rem", width: "5rem" }}
-                      variant="dark"
-                    />
-                  </div> */}
-            {/* )} */}
+            {addressesList?.length > 0 ? (
+              addressesList.map((address, i) => (
+                <tr key={i}>
+                  {/* <td align="center">{i+1}</td> */}
+                  <td align="center">{address.name}</td>
+                  <td align="center">{address.address}</td>
+                  <td align="center">
+                    <i className="bi bi-pencil-square mr-2 cursor-pointer" onClick={() => setFormValues(address)} />
+                    <i className="bi bi-trash cursor-pointer" onClick={() => deleteAddress(address._id)} />
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td />
+                <td>
+                  <h4>Record not found!</h4>
+                </td>
+                <td />
+              </tr>
+            )}
           </tbody>
         </Table>
       </Modal.Body>

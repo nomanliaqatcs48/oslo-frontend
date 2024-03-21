@@ -287,7 +287,13 @@ export default function SendTransaction({ balance, fetchData, address }) {
           handleClose={() => setIsScanQRModal(false)}
           setSendAddress={(address) => setSendAddress(address)}
         />
-        <AddressBookModal show={isAddressBookModal} handleClose={() => setIsAddressBookModal(false)} />
+        {address && (
+          <AddressBookModal
+            show={isAddressBookModal}
+            handleClose={() => setIsAddressBookModal(false)}
+            selectedAddress={address}
+          />
+        )}
       </div>
     </div>
   );

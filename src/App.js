@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
 import { ThemeProvider } from "styled-components";
 import { ToastContainer } from "react-toastify";
 import { Login } from "./features/auth/Login";
@@ -8,6 +9,8 @@ import { useSelector } from "react-redux";
 import { GlobalStyles } from "./global";
 import { lightTheme, darkTheme } from "./theme";
 import "./App.css";
+
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 function App() {
   const { theme } = useSelector((state) => state.theme);
