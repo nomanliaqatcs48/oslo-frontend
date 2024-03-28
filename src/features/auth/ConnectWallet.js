@@ -46,7 +46,7 @@ export default function ConnectWallet({ setWalletPage }) {
               <Button
                 label="Connect Existing Wallet"
                 className="mt-3"
-                secondary={true}
+                secondary={"true"}
                 disabled={!checkedTerms}
                 onClick={() => {dispatch(toggleSeedPharse(false)); setWalletPage("exist")}}
               />

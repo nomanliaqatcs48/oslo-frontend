@@ -55,7 +55,7 @@ export default function HelpUs({ setWalletPage, setShowCreatePasswordPage }) {
             <Button
               label="No Thanks"
               className="mt-3"
-              secondary={true}
+              secondary={"true"}
               onClick={setWalletPage}
             />
           </div>

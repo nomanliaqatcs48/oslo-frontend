@@ -185,9 +185,6 @@ export default function AddressBookModal({
         <Table responsive hover>
           <thead>
             <tr className="table-header">
-              {/* <th>
-                <div style={{ width: 20 }}>#</div>
-              </th> */}
               <th>
                 <div style={{ width: 100 }}>Name</div>
               </th>
@@ -203,7 +200,6 @@ export default function AddressBookModal({
             {addressesList?.length > 0 ? (
               addressesList.map((address, i) => (
                 <tr key={i}>
-                  {/* <td align="center">{i+1}</td> */}
                   <td align="center">{address.name}</td>
                   <td align="center">{address.address}</td>
                   <td align="center">

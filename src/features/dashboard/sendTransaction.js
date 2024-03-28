@@ -44,20 +44,26 @@ export default function SendTransaction({ balance, fetchData, address }) {
             <Text label={label} size={16} weight={600} className="mb-1" />
             <div>
               <a
-                href="Javascript:void(0)"
+                href="#javascript"
                 style={{
                   color: "#d2a63b",
                   fontWeight: 600,
                   marginRight: "1.5rem",
                 }}
-                onClick={() => setIsAddressBookModal(true)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsAddressBookModal(true)
+                }}
               >
                 Address Books
               </a>
               <a
-                href="Javascript:void(0)"
+                href="#javascript"
                 style={{ color: "#d2a63b", fontWeight: 600 }}
-                onClick={() => setIsScanQRModal(true)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsScanQRModal(true)
+                }}
               >
                 Scan QR Code
               </a>
@@ -170,10 +176,10 @@ export default function SendTransaction({ balance, fetchData, address }) {
                 {activeBtn === "send" ? (
                   <Formik
                     initialValues={{
-                      send_from: address,
-                      send_to: sendToAddress,
+                      send_from: address || "",
+                      send_to: sendToAddress || "",
                       // asset: "oslo",
-                      amount: null,
+                      amount: "",
                     }}
                     enableReinitialize
                     validationSchema={Yup.object({
@@ -248,7 +254,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
                             {lableInput({
                               label: "Amount",
                               name: "amount",
-                              value: values.amount,
+                              value: values?.amount,
                               placeholder: "0.00",
                               type: "text",
                               onChange: handleChange,

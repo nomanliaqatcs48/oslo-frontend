@@ -3,8 +3,8 @@ import Form from "react-bootstrap/Form";
 // import Select from 'react-select';
 import { useSelector, useDispatch } from "react-redux";
 import Logo from "../../assets/logo.svg";
-import {AddNewAddressBtn} from "../NewAddressBtn";
-import {ThemeIcon} from "../ThemeIcon";
+import { AddNewAddressBtn } from "../NewAddressBtn";
+import { ThemeIcon } from "../ThemeIcon";
 
 export default function Header({
   page,
@@ -25,38 +25,41 @@ export default function Header({
               <img src={Logo} alt="logo" height={35} />
             </div>
           )}
-          <div>
-          
-          </div>
+          <div></div>
           <div className="ml-auto d-flex oslo-form">
-            {page === "dashboard" && (
-              <>
-                <Form.Select
-                  className="address-select"
-                  value={selectedAddress}
-                  onChange={(e) => {
-                    console.log("e.target.value", e.target.value);
-                    const value = e.target.value;
-                    setSelectedAddress(value);
-                    localStorage.setItem("selectAddress", value);
-                  }}
-                >
-                  {addresses.length > 0 &&
-                    addresses.map((address, i) => (
-                      <option value={`address${i + 1}`}>
-                        <>
-                          <b style={{ fontWeight: "bold" }}>
-                            Account {i + 1}:{" "}
-                          </b>
-                          <p>{address}</p>
-                        </>
+            {page === "dashboard" &&
+              selectedAddress &&
+              addresses.length > 0 && (
+                <>
+                  <Form.Select
+                    className="address-select"
+                    value={selectedAddress}
+                    onChange={(e) => {
+                      console.log("e.target.value", e.target.value);
+                      const value = e.target.value;
+                      setSelectedAddress(value);
+                      localStorage.setItem("selectAddress", value);
+                    }}
+                  >
+                    {addresses.map((address, i) => (
+                      <option value={`address${i + 1}`} key={i}>Account {i + 1}: {address}
+                        {/* <span style={{ fontWeight: "bold" }}>Account {i + 1}: </span>
+                        <p>{address}</p> */}
                       </option>
                     ))}
-                </Form.Select>
-                <AddNewAddressBtn openModal={() => openModal()} className="d-none d-lg-block" />
-              </>
-            )}
-            <ThemeIcon dispatch={dispatch} theme={theme} page={page} className="d-none d-lg-block" />
+                  </Form.Select>
+                  <AddNewAddressBtn
+                    openModal={() => openModal()}
+                    className="d-none d-lg-block"
+                  />
+                </>
+              )}
+            <ThemeIcon
+              dispatch={dispatch}
+              theme={theme}
+              page={page}
+              className="d-none d-lg-block"
+            />
           </div>
         </div>
       </div>

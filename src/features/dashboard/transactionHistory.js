@@ -218,7 +218,7 @@ export default function TransactionHistory({ address }) {
               </thead>
               <tbody>
                 {!isLoading ? (
-                  transactionsList?.length > 0 ? (
+                  transactionsList?.length < 0 ? (
                     transactionsList.map((transaction, i) => (
                       <tr className="table-header" key={i}>
                         <td align="center">{transaction.hash}</td>
@@ -246,21 +246,26 @@ export default function TransactionHistory({ address }) {
                       </tr>
                     ))
                   ) : (
-                    <h3
+                    <tr
                       className="text-center not-found-msg"
-                      style={{  }}
+                      style={{ fontSize: "1.75rem", fontWeight: 500, lineHeight: 1.2 }}
                     >
+                      <td>
                       Data not found!
-                    </h3>
+                      </td>
+                    </tr>
                   )
                 ) : (
-                  <div className="spinner-loading-list">
+                  <tr className="spinner-loading-list">
+                    <td>
                     <Spinner
                       animation="border"
                       style={{ height: "5rem", width: "5rem" }}
                       variant="dark"
                     />
-                  </div>
+                    </td>
+                  </tr>
+                  
                 )}
               </tbody>
             </Table>

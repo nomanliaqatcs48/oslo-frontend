@@ -80,6 +80,7 @@ export default function Password({ onSubmit, btnLabel, section }) {
                   type={"checkbox"}
                   id={"pass-term-checkbox"}
                   checked={values.check}
+                  onChange={() => {}}
                   label={
                     <p className="description">
                       I understand that OSLO cannot recover this password for

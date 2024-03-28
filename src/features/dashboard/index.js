@@ -30,9 +30,13 @@ export default function Dashboard() {
     let selectAddress = window.localStorage.getItem("selectAddress");
     setSelectedAddress(selectAddress);
     let address = window.localStorage.getItem(selectAddress);
+    if(!address) {
+      navigate("/login");
+      return;
+    }
     address = JSON.parse(address);
-    setPublicAddress(address.address);
-    let accountBalance = await provider.getBalance(address.address);
+    setPublicAddress(address?.address);
+    let accountBalance = await provider.getBalance(address?.address);
 
     // const balance = await web3.eth.getBalance(connectedAccount[0]);
     setBalance(String(formatEthFunc(ethers.utils.formatEther(accountBalance))));
@@ -56,9 +60,10 @@ export default function Dashboard() {
   useEffect(() => {
     const addreess = localStorage.getItem("address1");
     const loginType = localStorage.getItem("loginType");
-    const data = JSON.parse(addreess);
-    if (!data.address || !loginType || loginType === "lock") {
+    // const data = JSON.parse(addreess);
+    if (!addreess || !loginType || loginType === "lock") {
       navigate("/login");
+      return;
     }
     setActiveTab(window.location.pathname.split("/")[1]);
   }, []);
