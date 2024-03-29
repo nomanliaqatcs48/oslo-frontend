@@ -1,7 +1,7 @@
 import React,{useState, useRef} from "react";
 import Modal from "react-bootstrap/Modal";
 // import QrReader from "react-qr-scanner";
-import {QrReader} from "react-qr-reader";
+import QrReader from 'react-qr-reader'
 
 const previewStyle = {
   height: 250,
@@ -33,27 +33,34 @@ export default function ScanQRCodeModal({show, handleClose, setSendAddress}) {
         <Modal.Title>Scan QR Code</Modal.Title>
       </Modal.Header>
       <Modal.Body className="mb-5">
-        <QrReader
+        {/* <QrReader
           delay={100}
           // cameraId={cameraId}
           style={previewStyle}
-          key={"environmentQR"}
+          key="environment"
+  constraints={{ facingMode: 'environment' }}
+  
   // constraints={{ facingMode: cameraId === 'user' ? 'user' : { exact: 'environment' } }}
-  // videoConstraints={{
-  //   facingMode: cameraId === 'user' ? 'user' : { exact: 'environment' }
-  // }}
+
 
           onError={handleError}
           onScan={handleScan}
           className="mt-5"
-          // videoConstraints={{
-          //   facingMode: cameraId
-          // }}
           // ref={videoRef}
-        />
+        /> */}
+        <QrReader
+    // ViewFinder={function noRefCheck(){}}
+    constraints={{
+      facingMode: cameraId
+    }}
+    facingMode={cameraId}
+    onError={handleError}
+    onScan={handleScan}
+    style={{ width: '100%' }}
+    // onResult={function noRefCheck(){}}
+    
+  />
         <button onClick={handleCameraSwitch} className="text-center">Switch Camera</button>
-     
-        {/* <p>{this.state.result}</p> */}
       </Modal.Body>
     </Modal>
   );
