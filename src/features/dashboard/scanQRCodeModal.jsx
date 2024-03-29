@@ -59,6 +59,7 @@ export default function ScanQRCodeModal({ show, handleClose, setSendAddress }) {
         facingMode={cameraId}
         constraints={{ facingMode: cameraId}}
         videoConstraints={{ aspectRatio: 1 }}
+        legacyMode={true}
       />
         <button onClick={handleCameraSwitch} className="text-center">
           Switch Camera1
