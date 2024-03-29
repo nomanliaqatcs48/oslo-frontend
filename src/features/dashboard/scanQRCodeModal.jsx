@@ -56,7 +56,8 @@ export default function ScanQRCodeModal({ show, handleClose, setSendAddress }) {
         onError={handleError}
         onScan={handleScan}
         style={{ width: '100%' }}
-        facingMode="environment"
+        facingMode={cameraId}
+        constraints={{ facingMode: cameraId}}
         videoConstraints={{ aspectRatio: 1 }}
       />
         <button onClick={handleCameraSwitch} className="text-center">
