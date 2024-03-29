@@ -61,7 +61,7 @@ export default function ScanQRCodeModal({ show, handleClose, setSendAddress }) {
         videoConstraints={{ aspectRatio: 1 }}
       />
         <button onClick={handleCameraSwitch} className="text-center">
-          Switch Camera
+          Switch Camera1
         </button>
 
         {/* <p>{this.state.result}</p> */}
