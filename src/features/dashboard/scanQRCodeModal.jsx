@@ -63,7 +63,7 @@ export default function ScanQRCodeModal({ show, handleClose, setSendAddress }) {
           // facingMode={cameraId}
           // videoId="video"
           videoConstraints={{
-            facingMode: cameraId === 'user' ? 'user' : { exact: 'environment' }
+            facingMode: cameraId
           }}
           onError={handleError}
           onScan={handleScan}
