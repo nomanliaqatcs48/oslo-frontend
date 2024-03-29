@@ -36,8 +36,9 @@ export default function ScanQRCodeModal({show, handleClose, setSendAddress}) {
           delay={100}
           // cameraId={cameraId}
           style={previewStyle}
-          key={cameraId}
-  constraints={{ facingMode: cameraId }}
+          // key={cameraId}
+  constraints={{ facingMode: { exact: "environment" }, }}
+  
 
           onError={handleError}
           onScan={handleScan}
@@ -45,7 +46,7 @@ export default function ScanQRCodeModal({show, handleClose, setSendAddress}) {
           // videoConstraints={{
           //   facingMode: cameraId
           // }}
-          ref={videoRef}
+          // ref={videoRef}
         />
         <button onClick={handleCameraSwitch} className="text-center">Switch Camera</button>
      
