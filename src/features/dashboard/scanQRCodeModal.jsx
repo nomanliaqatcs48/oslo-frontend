@@ -34,14 +34,17 @@ export default function ScanQRCodeModal({show, handleClose, setSendAddress}) {
       <Modal.Body className="mb-5">
         <QrReader
           delay={100}
-          cameraId={cameraId}
+          // cameraId={cameraId}
           style={previewStyle}
+          key={cameraId}
+  constraints={{ facingMode: cameraId }}
+
           onError={handleError}
           onScan={handleScan}
           className="mt-5"
-          videoConstraints={{
-            facingMode: cameraId === 'user' ? 'user' : { exact: 'environment' }
-          }}
+          // videoConstraints={{
+          //   facingMode: cameraId
+          // }}
           ref={videoRef}
         />
         <button onClick={handleCameraSwitch} className="text-center">Switch Camera</button>
