@@ -1,18 +1,19 @@
-import React,{useState, useRef} from "react";
+import React, { useState, useRef } from "react";
 import Modal from "react-bootstrap/Modal";
 // import QrReader from "react-qr-scanner";
-import QrReader from 'react-qr-reader'
+// import QrReader from "react-qr-reader";
+import QrReader from 'modern-react-qr-reader'
 
 const previewStyle = {
   height: 250,
   width: "100%",
 };
 
-export default function ScanQRCodeModal({show, handleClose, setSendAddress}) {
+export default function ScanQRCodeModal({ show, handleClose, setSendAddress }) {
   const handleScan = (data) => {
-    if(!data) return;
+    if (!data) return;
     console.log("data", data);
-    setSendAddress(data.text);
+    setSendAddress(data);
     handleClose();
   };
 
@@ -20,15 +21,19 @@ export default function ScanQRCodeModal({show, handleClose, setSendAddress}) {
     console.error(err);
   };
 
-  const [cameraId, setCameraId] = useState('environment');
+  const [cameraId, setCameraId] = useState("environment");
   const videoRef = useRef(null);
 
   const handleCameraSwitch = () => {
-    setCameraId(cameraId === 'user' ? 'environment' : 'user');
+    setCameraId(cameraId === "user" ? "environment" : "user");
   };
 
   return (
-    <Modal show={show} onHide={() => handleClose()} dialogClassName="modal-width">
+    <Modal
+      show={show}
+      onHide={() => handleClose()}
+      dialogClassName="modal-width"
+    >
       <Modal.Header closeButton>
         <Modal.Title>Scan QR Code</Modal.Title>
       </Modal.Header>
@@ -49,18 +54,22 @@ export default function ScanQRCodeModal({show, handleClose, setSendAddress}) {
           // ref={videoRef}
         /> */}
         <QrReader
-    // ViewFinder={function noRefCheck(){}}
-    constraints={{
-      facingMode: cameraId
-    }}
-    facingMode={cameraId}
-    onError={handleError}
-    onScan={handleScan}
-    style={{ width: '100%' }}
-    // onResult={function noRefCheck(){}}
-    
-  />
-        <button onClick={handleCameraSwitch} className="text-center">Switch Camera</button>
+          delay={500}
+          // ViewFinder={function noRefCheck(){}}
+          constraints={{
+            facingMode: cameraId,
+          }}
+          facingMode={cameraId}
+          // videoId="video"
+          onError={handleError}
+          onScan={handleScan}
+          style={previewStyle}
+          ref={videoRef}
+          // onResult={function noRefCheck(){}}
+        />
+        <button onClick={handleCameraSwitch} className="text-center">
+          Switch Camera
+        </button>
       </Modal.Body>
     </Modal>
   );
