@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useRef} from "react";
 import Modal from "react-bootstrap/Modal";
 import QrReader from "react-qr-scanner";
 
@@ -19,6 +19,13 @@ export default function ScanQRCodeModal({show, handleClose, setSendAddress}) {
     console.error(err);
   };
 
+  const [cameraId, setCameraId] = useState('user');
+  const videoRef = useRef(null);
+
+  const handleCameraSwitch = () => {
+    setCameraId(cameraId === 'user' ? 'environment' : 'user');
+  };
+
   return (
     <Modal show={show} onHide={() => handleClose()} dialogClassName="modal-width">
       <Modal.Header closeButton>
@@ -27,11 +34,18 @@ export default function ScanQRCodeModal({show, handleClose, setSendAddress}) {
       <Modal.Body className="mb-5">
         <QrReader
           delay={100}
+          cameraId={cameraId}
           style={previewStyle}
           onError={handleError}
           onScan={handleScan}
           className="mt-5"
+          videoConstraints={{
+            facingMode: cameraId === 'user' ? 'user' : { exact: 'environment' }
+          }}
+          ref={videoRef}
         />
+        <button onClick={handleCameraSwitch} className="text-center">Switch Camera</button>
+     
         {/* <p>{this.state.result}</p> */}
       </Modal.Body>
     </Modal>
