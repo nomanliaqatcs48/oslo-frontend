@@ -57,14 +57,14 @@ export default function ScanQRCodeModal({ show, handleClose, setSendAddress }) {
           // ViewFinder={function noRefCheck(){}}
           // constraints={{
 
-          //   facingMode: "users",
+          //   facingMode: cameraId,
           // }}
           cameraId={cameraId}
-          // facingMode={"user"}
+          facingMode={cameraId}
           // videoId="video"
-          videoConstraints={{
-            facingMode: cameraId === 'user' ? 'user' : { exact: 'environment' }
-          }}
+          // videoConstraints={{
+          //   facingMode: cameraId === 'user' ? 'user' : { exact: 'environment' }
+          // }}
           onError={handleError}
           onScan={handleScan}
           style={previewStyle}
