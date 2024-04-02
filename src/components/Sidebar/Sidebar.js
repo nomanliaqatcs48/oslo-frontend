@@ -49,7 +49,7 @@ export const ResposiveSidebar = ({
         <div className="l-navbar" id="nav-bar">
           <nav className="nav">
             <img src={Logo} alt="logo" height={35} />
-            <div className="mt-5 justify-content-center d-block">
+            <div className="mt-5 justify-content-center d-flex flex-column align-items-center">
               <div
                 className={`d-flex mb-2 cursor-pointer sidebar-content ${
                   activeTab === "dashboard" && "active"
