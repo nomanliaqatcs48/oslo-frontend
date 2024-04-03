@@ -286,11 +286,12 @@ export default function SendTransaction({ balance, fetchData, address }) {
             </>
           )}
         </div>
+        {isScanQRModal &&
         <ScanQRCodeModal
           show={isScanQRModal}
           handleClose={() => setIsScanQRModal(false)}
           setSendAddress={(address) => setSendAddress(address)}
-        />
+        />}
         {address && (
           <AddressBookModal
             show={isAddressBookModal}
