@@ -50,22 +50,22 @@ export default function Header({
                       </option>
                     ))}
                   </Form.Select>
-                  {!isMobile && (
+                  {/* {!isMobile && (
                     <AddNewAddressBtn
                       openModal={() => openModal()}
                       className="d-none d-lg-block"
                     />
-                  )}
+                  )} */}
                 </>
               )}
-            {!isMobile && (
+            {/* {!isMobile && (
               <ThemeIcon
                 dispatch={dispatch}
                 theme={theme}
                 page={page}
                 className="d-none d-lg-block"
               />
-            )}
+            )} */}
           </div>
         </div>
       </div>
