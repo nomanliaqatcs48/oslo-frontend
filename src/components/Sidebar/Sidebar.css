@@ -80,10 +80,7 @@ h1 {
   margin-bottom: 1.5rem;
   transition: 0.3s;
   bottom: 0;
-  position: fixed;
-  @media (max-width: 575px) {
-    bottom: 130px;
-  }
+  /* position: fixed; */
 }
 
 .nav_logo {
@@ -103,7 +100,7 @@ h1 {
 }
 
 .nav_link {
-  position: relative;
+  /* position: relative; */
   /* color: var(--first-color-light); */
   /* margin-bottom: 1.5rem;
   transition: 0.3s;
@@ -114,6 +111,9 @@ h1 {
   position: absolute;
   bottom: 0;
   left: 0;
+  @media (max-width: 575px) {
+    bottom: 40px;
+  }
 }
 
 .nav_end_link {
