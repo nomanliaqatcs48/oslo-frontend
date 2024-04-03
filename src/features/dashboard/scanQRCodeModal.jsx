@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import QrReader from "react-qr-scanner";
 // import QrReader from "react-qr-reader";
 // import QrReader from 'react-web-qr-reader';
-// import QrReader  from 'react-qr-reader';
+import QrReader  from 'react-qr-reader';
 const previewStyle = {
   height: 250,
   width: "100%",
@@ -53,6 +53,9 @@ export default function ScanQRCodeModal({ show, handleClose, setSendAddress }) {
           className="mt-5"
           // ref={videoRef}
         /> */}
+         <button onClick={handleCameraSwitch} className="text-center">
+          Switch Camera
+        </button>
         <QrReader
           delay={500}
           // ViewFinder={function noRefCheck(){}}
@@ -72,9 +75,7 @@ export default function ScanQRCodeModal({ show, handleClose, setSendAddress }) {
           // legacyMode
           // onResult={function noRefCheck(){}}
         />
-        <button onClick={handleCameraSwitch} className="text-center">
-          Switch Camera
-        </button>
+       
       </Modal.Body>
     </Modal>
   );
