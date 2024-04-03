@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Logo from "../../assets/logo.svg";
 import { AddNewAddressBtn } from "../NewAddressBtn";
 import { ThemeIcon } from "../ThemeIcon";
+import { isMobile } from "react-device-detect";
 
 export default function Header({
   page,
@@ -42,24 +43,29 @@ export default function Header({
                     }}
                   >
                     {addresses.map((address, i) => (
-                      <option value={`address${i + 1}`} key={i}>Account {i + 1}: {address}
+                      <option value={`address${i + 1}`} key={i}>
+                        Account {i + 1}: {address}
                         {/* <span style={{ fontWeight: "bold" }}>Account {i + 1}: </span>
                         <p>{address}</p> */}
                       </option>
                     ))}
                   </Form.Select>
-                  <AddNewAddressBtn
-                    openModal={() => openModal()}
-                    className="d-none d-lg-block"
-                  />
+                  {!isMobile && (
+                    <AddNewAddressBtn
+                      openModal={() => openModal()}
+                      className="d-none d-lg-block"
+                    />
+                  )}
                 </>
               )}
-            <ThemeIcon
-              dispatch={dispatch}
-              theme={theme}
-              page={page}
-              className="d-none d-lg-block"
-            />
+            {!isMobile && (
+              <ThemeIcon
+                dispatch={dispatch}
+                theme={theme}
+                page={page}
+                className="d-none d-lg-block"
+              />
+            )}
           </div>
         </div>
       </div>

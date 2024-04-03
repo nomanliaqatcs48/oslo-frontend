@@ -7,6 +7,7 @@ import {MenuIcon} from "../../assets/menu";
 import "./Sidebar.css";
 import { AddNewAddressBtn } from "../NewAddressBtn";
 import { ThemeIcon } from "../ThemeIcon";
+import { isMobile } from "react-device-detect";
 
 export const ResposiveSidebar = ({
   activeTab,
@@ -106,6 +107,7 @@ export const ResposiveSidebar = ({
           </nav>
         </div>
       </Sidebar>
+      {/* {isMobile && ( */}
       <div className="d-lg-none d-flex w-100 mt-3 mb-4 justify-content-between">
         <div onClick={() => setToggled(true)}>
           <MenuIcon color={theme === "light" ? "#000000" : "#FFFFFF"} />

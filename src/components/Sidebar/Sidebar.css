@@ -81,6 +81,9 @@ h1 {
   transition: 0.3s;
   bottom: 0;
   position: fixed;
+  @media (max-width: 575px) {
+    bottom: 100px;
+  }
 }
 
 .nav_logo {

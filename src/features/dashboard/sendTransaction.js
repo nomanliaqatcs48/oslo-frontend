@@ -62,7 +62,8 @@ export default function SendTransaction({ balance, fetchData, address }) {
                   setIsScanQRModal(true)
                 }}
               >
-                Scan QR Code
+                Scan QR 
+                {/* Code */}
               </a>
             </div>
           </div>

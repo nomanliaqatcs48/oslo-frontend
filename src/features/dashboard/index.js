@@ -122,13 +122,13 @@ export default function Dashboard() {
         </div>
         <div className="col-12 col-md-12 col-lg-10">
           <div className="mt-4">
-            {/* <Header
+            <Header
               page="dashboard"
               openModal={() => setShowModal(true)}
               selectedAddress={selectedAddress}
               setSelectedAddress={(adddress) => setSelectedAddress(adddress)}
               addresses={JSON.parse(window.localStorage.getItem("addressesList"))}
-            /> */}
+            />
             {activeTab === "dashboard" && (
               <Send
                 balance={balance}
