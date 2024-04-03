@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Form from "react-bootstrap/Form";
+import { useSelector } from "react-redux";
 import InputGroup from "react-bootstrap/InputGroup";
 import { toast } from "react-toastify";
 import Spinner from "react-bootstrap/Spinner";
@@ -24,7 +25,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
   const [isScanQRModal, setIsScanQRModal] = useState(false);
   const [isAddressBookModal, setIsAddressBookModal] = useState(false);
   const [sendToAddress, setSendAddress] = useState("");
-
+  const { theme } = useSelector((state) => state.theme);
   const lableInput = ({
     label,
     name,
@@ -269,7 +270,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
                               <Spinner
                                 animation="border"
                                 style={{ height: "7rem", width: "7rem" }}
-                                variant="dark"
+                                variant={theme === "light" ? "dark" : "light"}
                               />
                             </div>
                           )}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
+import { useSelector } from "react-redux";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
@@ -20,6 +21,8 @@ export default function TransactionHistory({ address }) {
   const [isLoading, setIsLoading] = useState(false);
   const [date, setDate] = useState("");
   const convertRate = 1000000000000000000;
+
+  const { theme } = useSelector((state) => state.theme);
 
   const totalSentTransactions = (items) => {
     const sendTransactionsList = items.filter(
@@ -257,11 +260,11 @@ export default function TransactionHistory({ address }) {
                   )
                 ) : (
                   <tr className="spinner-loading-list">
-                    <td>
+                    <td style={{background: "transparent"}}>
                     <Spinner
                       animation="border"
-                      style={{ height: "5rem", width: "5rem" }}
-                      variant="dark"
+                      style={{ height: "5rem", width: "5rem", background: "transparent" }}
+                      variant={theme === "light" ? "dark" : "light"}
                     />
                     </td>
                   </tr>
