@@ -116,10 +116,12 @@ export const GlobalStyles = createGlobalStyle`
 
   .camera-btn {
     background: ${({ theme }) => theme.primaryBtn};
+    border: 1px solid ${({ theme }) => theme.primaryBtn};
     color: #FFF;
-    display: none;
-    @media (max-width: 575px) {
-      display: flex;
+    &:hover {
+      background: ${({ theme }) => theme.primaryBtn};
+      border: 1px solid ${({ theme }) => theme.primaryBtn};
+    color: #FFF;
     }
   }
 
