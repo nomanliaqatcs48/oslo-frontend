@@ -9,7 +9,7 @@ export const ThemeIcon = ({ dispatch, theme, page, className }) => (
     alt="theme"
     width={32}
     height={32}
-    className={`cursor-pointer mr-1 ${
+    className={`cursor-pointer ${
       page === "dashboard" && "mt-1"
     } ${className}`}
     onClick={() => dispatch(setTheme(theme === "light" ? "dark" : "light"))}

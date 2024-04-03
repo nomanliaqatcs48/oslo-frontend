@@ -19,8 +19,7 @@ export default function Header({
 
   return (
     <div className="row mb-5">
-      <div className="col-12 col-md-12 col-lg-12">
-        <div className="d-flex w-100">
+      <div className="col-12 col-md-12 col-lg-12 d-flex">
           {page === "login" && (
             <div>
               <img src={Logo} alt="logo" height={35} />
@@ -60,7 +59,6 @@ export default function Header({
                 page={page}
                 className="d-none d-lg-block"
               />
-          </div>
         </div>
       </div>
     </div>

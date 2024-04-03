@@ -1,9 +1,9 @@
 // import React, { useState, useRef, useEffect } from "react";
 // import Modal from "react-bootstrap/Modal";
-// // import QrReader from "react-qr-scanner";
+// import QrReader from "react-qr-scanner";
 // // import QrReader from "react-qr-reader";
 // // import QrReader from 'react-web-qr-reader';
-// import QrReader  from 'react-qr-reader';
+// // import QrReader  from 'react-qr-reader';
 // const previewStyle = {
 //   height: 250,
 //   width: "100%",
@@ -31,7 +31,7 @@
 //   useEffect(() => {
 //     var video = document.querySelector('video');
 //     var isPlaying = video?.currentTime > 0 && !video?.paused && !video?.ended 
-//     && video.readyState > video.HAVE_CURRENT_DATA;
+//     && video?.readyState > video?.HAVE_CURRENT_DATA;
 
 // if (!isPlaying) {
 //   video?.play();
@@ -70,6 +70,8 @@
 //             video: true,
 //             facingMode: cameraId 
 //           }}
+//           key={cameraId}
+
 //           facingMode={cameraId}
 //           // cameraId={cameraId}
 //           // facingMode={cameraId}
@@ -89,45 +91,73 @@
 // }
 
 
-import React, { useState } from 'react';
-import QrReader from 'react-qr-reader';
-import Modal from "react-bootstrap/Modal";
+// versi "react-qr-reader" 1.0.0. component API harus disesuaikan dengan yg baru
 
-const QRScanner = ({show, handleClose}) => {
-  const [facingMode, setFacingMode] = useState('environment'); // 'user' for front camera, 'environment' for back camera
+import { useState } from "react";
+import QrReader from "react-qr-reader";
+ import Modal from "react-bootstrap/Modal";
 
-  const handleScan = (data) => {
-    if (data) {
-      console.log('Scan result:', data);
+const App = ({show, handleClose}) => {
+  const [selected, setSelected] = useState("environment");
+  const [startScan, setStartScan] = useState(false);
+  const [loadingScan, setLoadingScan] = useState(false);
+  const [data, setData] = useState("");
+
+  const handleScan = async (scanData) => {
+    setLoadingScan(true);
+    console.log(`loaded data data`, scanData);
+    if (scanData && scanData !== "") {
+      console.log(`loaded >>>`, scanData);
+      setData(scanData);
+      setStartScan(false);
+      setLoadingScan(false);
+      // setPrecScan(scanData);
     }
   };
-
-  const handleError = (error) => {
-    console.error('QR Scanner Error:', error);
+  const handleError = (err) => {
+    console.error(err);
   };
-
-  const toggleFacingMode = () => {
-    setFacingMode(prevMode => (prevMode === 'environment' ? 'user' : 'environment'));
-  };
-
   return (
     <Modal
       show={show}
       onHide={() => handleClose()}
       dialogClassName="modal-width"
     >
-    <div>
-      <button onClick={toggleFacingMode}>Toggle Camera</button>
-      <QrReader
-        delay={300}
-        onError={handleError}
-        onScan={handleScan}
-        facingMode={facingMode}
-        style={{ width: '100%' }}
-      />
+    <div className="App">
+      <h1>Hello CodeSandbox</h1>
+      <h2>
+        Last Scan:
+        {selected}
+      </h2>
+
+      <button
+        onClick={() => {
+          setStartScan(!startScan);
+        }}
+      >
+        {startScan ? "Stop Scan" : "Start Scan"}
+      </button>
+      {startScan && (
+        <>
+          <select onChange={(e) => setSelected(e.target.value)}>
+            <option value={"environment"}>Back Camera</option>
+            <option value={"user"}>Front Camera</option>
+          </select>
+          <QrReader
+            facingMode={selected}
+            delay={1000}
+            onError={handleError}
+            onScan={handleScan}
+            // chooseDeviceId={()=>selected}
+            style={{ width: "300px" }}
+          />
+        </>
+      )}
+      {loadingScan && <p>Loading</p>}
+      {data !== "" && <p>{data}</p>}
     </div>
     </Modal>
   );
 };
 
-export default QRScanner;
+export default App;
