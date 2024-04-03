@@ -53,7 +53,7 @@ h1 {
   z-index: var(--z-fixed);
   position: relative;
   @media (max-width: 575px) {
-    height: 90vh;
+    height: 95vh;
   }
 }
 

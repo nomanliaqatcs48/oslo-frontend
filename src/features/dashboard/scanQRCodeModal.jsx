@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
-// import QrReader from "react-qr-scanner";
-import QrReader from "react-qr-reader";
+import QrReader from "react-qr-scanner";
+// import QrReader from "react-qr-reader";
 
 const previewStyle = {
   height: 250,
@@ -17,15 +17,18 @@ export default function ScanQRCodeModal({ show, handleClose, setSendAddress }) {
   };
 
   const handleError = (err) => {
-    console.error(err);
+    console.log(err);
   };
 
-  const [cameraId, setCameraId] = useState("environment");
+  const [cameraId, setCameraId] = useState("user");
   const videoRef = useRef(null);
 
   const handleCameraSwitch = () => {
     setCameraId(cameraId === "user" ? "environment" : "user");
   };
+
+  useEffect(() => {
+  },[])
 
   return (
     <Modal
@@ -56,13 +59,17 @@ export default function ScanQRCodeModal({ show, handleClose, setSendAddress }) {
           delay={500}
           // ViewFinder={function noRefCheck(){}}
           constraints={{
-            facingMode: cameraId,
+            video: true,
+            facingMode: cameraId 
           }}
           facingMode={cameraId}
-          // videoId="video"
+          // cameraId={cameraId}
+          // facingMode={cameraId}
+          videoId="video"
           onError={handleError}
           onScan={handleScan}
           style={previewStyle}
+          // legacyMode
           // onResult={function noRefCheck(){}}
         />
         <button onClick={handleCameraSwitch} className="text-center">
