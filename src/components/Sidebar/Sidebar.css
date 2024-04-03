@@ -82,7 +82,7 @@ h1 {
   bottom: 0;
   position: fixed;
   @media (max-width: 575px) {
-    bottom: 100px;
+    bottom: 130px;
   }
 }
 
