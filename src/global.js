@@ -113,6 +113,22 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.primaryBtn};
     color: #FFF;
   }
+
+  .camera-btn {
+    background: ${({ theme }) => theme.primaryBtn};
+    color: #FFF;
+    display: none;
+    @media (max-width: 575px) {
+      display: flex;
+    }
+  }
+
+  .d-camera {
+    display: none;
+    @media (max-width: 575px) {
+      display: flex;
+    }
+  }
   
   .inactive-step {
     background: #CFB57740;

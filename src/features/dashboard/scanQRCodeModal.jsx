@@ -1,12 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-// import QrReader from "react-qr-scanner";
-// import QrReader from "react-qr-reader";
-// import QrReader from 'react-web-qr-reader';
+import Button from "react-bootstrap/Button";
 import QrReader  from 'react-qr-reader';
 const previewStyle = {
-  height: 250,
-  width: "100%",
+  // height: 250,
+  width: "350px",
 };
 
 export default function ScanQRCodeModal({ show, handleClose, setSendAddress }) {
@@ -22,7 +20,6 @@ export default function ScanQRCodeModal({ show, handleClose, setSendAddress }) {
   };
 
   const [cameraId, setCameraId] = useState("environment");
-  const videoRef = useRef(null);
 
   const handleCameraSwitch = () => {
     setCameraId(cameraId === "user" ? "environment" : "user");
@@ -37,45 +34,29 @@ export default function ScanQRCodeModal({ show, handleClose, setSendAddress }) {
       <Modal.Header closeButton>
         <Modal.Title>Scan QR Code</Modal.Title>
       </Modal.Header>
-      <Modal.Body className="mb-5">
-        {/* <QrReader
-          delay={100}
-          // cameraId={cameraId}
-          style={previewStyle}
-          key="environment"
-  constraints={{ facingMode: 'environment' }}
-  
-  // constraints={{ facingMode: cameraId === 'user' ? 'user' : { exact: 'environment' } }}
-
-
-          onError={handleError}
-          onScan={handleScan}
-          className="mt-5"
-          // ref={videoRef}
-        /> */}
-         <button onClick={handleCameraSwitch} className="text-center">
-          Switch Camera
-        </button>
+      <Modal.Body >
+        <div className="mb-5 d-flex w-100 justify-content-center">
         <QrReader
           delay={500}
-          // ViewFinder={function noRefCheck(){}}
           constraints={{
             video: true,
-            facingMode: cameraId 
+            facingMode: cameraId ,
+            aspectRatio: { ideal: 1 }
           }}
           key={cameraId}
 
           facingMode={cameraId}
-          // cameraId={cameraId}
-          // facingMode={cameraId}
           videoId="video"
           onError={handleError}
           onScan={handleScan}
           style={previewStyle}
-          // legacyMode
-          // onResult={function noRefCheck(){}}
         />
-       
+        </div>
+        <div className="d-camera justify-content-center w-100 ">
+        <Button onClick={handleCameraSwitch} className="camera-btn">
+          {cameraId === "environment" ? "Front Camera" : "Back Camera"}
+        </Button>
+        </div>
       </Modal.Body>
     </Modal>
   );
