@@ -19,14 +19,13 @@ export default function Header({
 
   return (
     <div className="row mb-5">
-      <div className="col-md-12 col-lg-12">
+      <div className="col-12 col-md-12 col-lg-12">
         <div className="d-flex w-100">
           {page === "login" && (
             <div>
               <img src={Logo} alt="logo" height={35} />
             </div>
           )}
-          <div></div>
           <div className="ml-auto d-flex oslo-form">
             {page === "dashboard" &&
               selectedAddress &&
@@ -36,7 +35,6 @@ export default function Header({
                     className="address-select"
                     value={selectedAddress}
                     onChange={(e) => {
-                      console.log("e.target.value", e.target.value);
                       const value = e.target.value;
                       setSelectedAddress(value);
                       localStorage.setItem("selectAddress", value);
@@ -50,20 +48,18 @@ export default function Header({
                       </option>
                     ))}
                   </Form.Select>
-                    {/* <AddNewAddressBtn
+                    <AddNewAddressBtn
                       openModal={() => openModal()}
                       className="d-none d-lg-block"
-                    /> */}
+                    />
                 </>
               )}
-            {/* {!isMobile && (
               <ThemeIcon
                 dispatch={dispatch}
                 theme={theme}
                 page={page}
                 className="d-none d-lg-block"
               />
-            )} */}
           </div>
         </div>
       </div>
