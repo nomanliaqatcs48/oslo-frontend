@@ -45,11 +45,7 @@ export default function SendTransaction({ balance, fetchData, address }) {
             <div>
               <a
                 href="#javascript"
-                style={{
-                  color: "#d2a63b",
-                  fontWeight: 600,
-                  marginRight: "1.5rem",
-                }}
+                className="address-book-link"
                 onClick={(e) => {
                   e.preventDefault();
                   setIsAddressBookModal(true)
