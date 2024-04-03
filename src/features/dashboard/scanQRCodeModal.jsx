@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
-import QrReader from "react-qr-scanner";
+// import QrReader from "react-qr-scanner";
 // import QrReader from "react-qr-reader";
 // import QrReader from 'react-web-qr-reader';
 import QrReader  from 'react-qr-reader';
