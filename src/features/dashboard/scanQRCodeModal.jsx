@@ -144,7 +144,7 @@ const App = ({show, handleClose}) => {
             <option value={"user"}>Front Camera</option>
           </select>
           <QrReader
-            facingMode={selected}
+            facingMode={"environment"}
             delay={1000}
             onError={handleError}
             onScan={handleScan}
