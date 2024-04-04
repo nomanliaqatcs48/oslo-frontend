@@ -14,14 +14,14 @@ export default function SecureWallet({ setPageStep, createAccount }) {
           as the 'master key' to unlock access to your Oslo Crypto wallet and
           protect your funds.
         </p>
-        <div className="content fw-bold mt-3">
+        {/* <div className="content fw-bold mt-3">
           How do I save my Secret Recovery Phrase?
         </div>
         <ul className="description light-gray mt-2">
           <li>Save in a password manager.</li>
           <li>Store in a safe deposit box.</li>
           <li>Write down and store in multiple secure places.</li>
-        </ul>
+        </ul> */}
         <div className="content fw-bold mt-3">
           Should I share my Secret Recovery Phrase?
         </div>
