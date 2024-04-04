@@ -30,7 +30,7 @@ export default function Header({
               selectedAddress &&
               addresses.length > 0 && (
                 <>
-                  {/* <Form.Select
+                  <Form.Select
                     className="address-select"
                     value={selectedAddress}
                     onChange={(e) => {
@@ -44,7 +44,7 @@ export default function Header({
                         Account {i + 1}: {address}
                       </option>
                     ))}
-                  </Form.Select> */}
+                  </Form.Select>
                     <AddNewAddressBtn
                       openModal={() => openModal()}
                       className="d-none d-lg-block"
