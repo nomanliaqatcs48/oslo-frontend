@@ -32,7 +32,7 @@ export default function Header({
                 <div>
                   <Form.Select
                     className="address-select"
-                    value={selectedAddress.substring(0,25)+ "..."}
+                    value={selectedAddress.substring(0,20)+ "..."}
                     onChange={(e) => {
                       const value = e.target.value;
                       setSelectedAddress(value);
@@ -41,7 +41,7 @@ export default function Header({
                   >
                     {addresses.map((address, i) => (
                       <option value={`address${i + 1}`} key={i}>
-                        Account {i + 1}: {address.substring(0,25)+ "..."} 
+                        Account {i + 1}: {address.substring(0,20)+ "..."} 
                       </option>
                     ))}
                   </Form.Select>
