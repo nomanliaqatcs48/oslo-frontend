@@ -41,7 +41,7 @@ export default function Header({
                   >
                     {addresses.map((address, i) => (
                       <option value={`address${i + 1}`} key={i}>
-                        Account {i + 1}: {address.substring(0,40)+ "..."} 
+                        Account {i + 1}: {address.substring(0,10)+ "..."} 
                       </option>
                     ))}
                   </Form.Select>
