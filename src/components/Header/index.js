@@ -30,7 +30,7 @@ export default function Header({
               selectedAddress &&
               addresses.length > 0 && (
                 <>
-                  <Form.Select
+                  {/* <Form.Select
                     className="address-select"
                     value={selectedAddress}
                     onChange={(e) => {
@@ -42,11 +42,9 @@ export default function Header({
                     {addresses.map((address, i) => (
                       <option value={`address${i + 1}`} key={i}>
                         Account {i + 1}: {address}
-                        {/* <span style={{ fontWeight: "bold" }}>Account {i + 1}: </span>
-                        <p>{address}</p> */}
                       </option>
                     ))}
-                  </Form.Select>
+                  </Form.Select> */}
                     <AddNewAddressBtn
                       openModal={() => openModal()}
                       className="d-none d-lg-block"
