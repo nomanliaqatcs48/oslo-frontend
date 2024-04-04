@@ -25,7 +25,7 @@ export default function Header({
               <img src={Logo} alt="logo" height={35} />
             </div>
           )}
-          <div className=" oslo-form">
+          {/* <div className="ml-auto d-flex oslo-form"> */}
             {page === "dashboard" &&
               selectedAddress &&
               addresses.length > 0 && (
@@ -57,7 +57,7 @@ export default function Header({
                 page={page}
                 className="d-none d-lg-block"
               />
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );
