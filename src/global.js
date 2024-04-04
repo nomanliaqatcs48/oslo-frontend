@@ -214,7 +214,7 @@ export const GlobalStyles = createGlobalStyle`
   .address-select {  
     width: 360px; 
     @media (max-width: 991px) {
-      width: 100%;
+      width: 70%;
     }
   }
 
