@@ -41,7 +41,7 @@ export default function Header({
                   >
                     {addresses.map((address, i) => (
                       <option value={`address${i + 1}`} key={i}>
-                        Account {i + 1}: 
+                        Account {i + 1}: 1234567891012
                         {/* {address} */}
                       </option>
                     ))}
