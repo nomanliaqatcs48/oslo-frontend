@@ -107,7 +107,7 @@ export const ResposiveSidebar = ({
           </nav>
         </div>
       </Sidebar>
-      <div className="d-lg-none d-flex w-100 mt-3 mb-4 justify-content-between">
+      {/* <div className="d-lg-none d-flex w-100 mt-3 mb-4 justify-content-between">
         <div onClick={() => setToggled(true)}>
           <MenuIcon color={theme === "light" ? "#000000" : "#FFFFFF"} />
         </div>
@@ -115,7 +115,7 @@ export const ResposiveSidebar = ({
           <AddNewAddressBtn openModal={() => openModal()} screen="mobile" />
           <ThemeIcon dispatch={dispatch} theme={theme} page={page} />
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
