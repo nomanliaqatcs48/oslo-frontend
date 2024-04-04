@@ -32,7 +32,7 @@ export default function Header({
                 <div>
                   <Form.Select
                     className="address-select"
-                    value={selectedAddress}
+                    value={selectedAddress.substring(0,25)+ "..."}
                     onChange={(e) => {
                       const value = e.target.value;
                       setSelectedAddress(value);
