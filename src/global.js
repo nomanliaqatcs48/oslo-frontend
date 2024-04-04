@@ -211,7 +211,7 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-  .address-select1 {  
+  .address-select {  
     width: 360px; 
     @media (max-width: 991px) {
       width: 100%;
