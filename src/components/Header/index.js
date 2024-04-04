@@ -25,7 +25,7 @@ export default function Header({
               <img src={Logo} alt="logo" height={35} />
             </div>
           )}
-          <div className="ml-auto d-flex oslo-form">
+          <div className=" oslo-form">
             {page === "dashboard" &&
               selectedAddress &&
               addresses.length > 0 && (
@@ -45,18 +45,18 @@ export default function Header({
                       </option>
                     ))}
                   </Form.Select>
-                    {/* <AddNewAddressBtn
+                    <AddNewAddressBtn
                       openModal={() => openModal()}
                       className="d-none d-lg-block"
-                    /> */}
+                    />
                 </div>
               )}
-              {/* <ThemeIcon
+              <ThemeIcon
                 dispatch={dispatch}
                 theme={theme}
                 page={page}
                 className="d-none d-lg-block"
-              /> */}
+              />
         </div>
       </div>
     </div>
