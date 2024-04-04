@@ -31,7 +31,7 @@ export default function Header({
               addresses.length > 0 && (
                 <div>
                   <select
-                    className="address-select"
+                    // className="address-select"
                     value={selectedAddress}
                     onChange={(e) => {
                       const value = e.target.value;
@@ -41,7 +41,8 @@ export default function Header({
                   >
                     {addresses.map((address, i) => (
                       <option value={`address${i + 1}`} key={i}>
-                        Account {i + 1}: {address}
+                        Account {i + 1}:
+                         {/* {address} */}
                       </option>
                     ))}
                   </select>
