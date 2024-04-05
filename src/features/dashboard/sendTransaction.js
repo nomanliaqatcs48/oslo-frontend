@@ -165,7 +165,7 @@ export default function SendTransaction({ balance, fetchData, address, merchantA
               </div>
               <div className="total-oslo mt-2">
                 <Text
-                  label={`OSLO ${parseInt(balance).toFixed(2)}`}
+                  label={`OSLO ${parseFloat(balance).toFixed(2)}`}
                   size={38}
                   weight={600}
                 />

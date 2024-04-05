@@ -31,7 +31,7 @@ export default function Dashboard() {
     let selectAddress = window.localStorage.getItem("selectAddress");
     setSelectedAddress(selectAddress);
     let address = window.localStorage.getItem(selectAddress);
-    if(!address) {
+    if (!address) {
       navigate("/login");
       return;
     }
@@ -41,6 +41,7 @@ export default function Dashboard() {
     let accountBalance = await provider.getBalance(address?.address);
 
     // const balance = await web3.eth.getBalance(connectedAccount[0]);
+    console.log("String(formatEthFunc(ethers.utils.formatEther(accountBalance))): ", balance ,String(formatEthFunc(ethers.utils.formatEther(accountBalance))))
     setBalance(String(formatEthFunc(ethers.utils.formatEther(accountBalance))));
   };
 
@@ -83,17 +84,22 @@ export default function Dashboard() {
       let addressesList = window.localStorage.getItem("addressesList");
       addressesList = JSON.parse(addressesList);
       const { address, privateKey } = account.account;
-      if(addressesList.includes(address)){
+      if (addressesList.includes(address)) {
         toast.error("This address is already added!", {
           theme: "colored",
         });
-        return
+        return;
       }
       var secretKey = CryptoJS.AES.encrypt(privateKey, password).toString();
       var secret = CryptoJS.AES.encrypt(password, address).toString();
       window.localStorage.setItem(
         `address${addressesList?.length + 1 || 2}`,
-        JSON.stringify({ address, secretKey, secret, merchant_account: merchant_account === "N" ? false : true })
+        JSON.stringify({
+          address,
+          secretKey,
+          secret,
+          merchant_account: merchant_account === "N" ? false : true,
+        })
       );
       addressesList.push(address);
       window.localStorage.setItem(
@@ -129,7 +135,9 @@ export default function Dashboard() {
               openModal={() => setShowModal(true)}
               selectedAddress={selectedAddress}
               setSelectedAddress={(adddress) => setSelectedAddress(adddress)}
-              addresses={JSON.parse(window.localStorage.getItem("addressesList"))}
+              addresses={JSON.parse(
+                window.localStorage.getItem("addressesList")
+              )}
             />
             {activeTab === "dashboard" && (
               <Send
