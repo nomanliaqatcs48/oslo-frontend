@@ -14,10 +14,11 @@ import { sendToken } from "../../wallet-utils/TransactionUtils";
 import RecieveTransaction from "./recieveTransaction";
 import ScanQRCodeModal from "./scanQRCodeModal";
 import AddressBookModal from "./addressBookModal";
+import VerifySecretKeyModal from "./verifySecretKeyModal";
 
 var CryptoJS = require("crypto-js");
 
-export default function SendTransaction({ balance, fetchData, address }) {
+export default function SendTransaction({ balance, fetchData, address, merchantAccount }) {
   const [success, setSuccess] = useState(false);
   const [activeBtn, setActiveBtn] = useState("send");
   const [loading, setLoading] = useState(false);
@@ -25,6 +26,9 @@ export default function SendTransaction({ balance, fetchData, address }) {
   const [isScanQRModal, setIsScanQRModal] = useState(false);
   const [isAddressBookModal, setIsAddressBookModal] = useState(false);
   const [sendToAddress, setSendAddress] = useState("");
+  const [showVerifySecretKeyModal, setShowVerifySecretKeyModal] = useState(false);
+  const [sendFormValue, setSendFormValue] = useState(null);
+  
   const { theme } = useSelector((state) => state.theme);
   const lableInput = ({
     label,
@@ -198,6 +202,13 @@ export default function SendTransaction({ balance, fetchData, address }) {
                       // }
                       // register(data);
                       const { amount, send_from, send_to } = values;
+                      setSendFormValue({
+                        amount, accountAddress: send_from, destinationAddress: send_to 
+                      })
+                      if(merchantAccount){
+                        setShowVerifySecretKeyModal(true);
+                        return
+                      }
                       transfer({
                         amount: amount,
                         accountAddress: send_from,
@@ -299,6 +310,12 @@ export default function SendTransaction({ balance, fetchData, address }) {
             selectedAddress={address}
           />
         )}
+        {showVerifySecretKeyModal &&
+         <VerifySecretKeyModal show={showVerifySecretKeyModal} handleToogle={(val) => setShowVerifySecretKeyModal(val)}  handleSubmit={() => transfer({amount: sendFormValue?.amount,
+          accountAddress: sendFormValue?.accountAddress,
+          destinationAddress: sendFormValue?.destinationAddress,})}
+          address={address} />
+        }
       </div>
     </div>
   );

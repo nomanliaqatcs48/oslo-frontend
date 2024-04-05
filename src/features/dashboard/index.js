@@ -23,6 +23,7 @@ export default function Dashboard() {
   const [showSecretModal, setShowSecretModal] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [publicAddress, setPublicAddress] = useState("");
+  const [merchantAccount, setMerchantAccount] = useState(false);
 
   const fetchData = async () => {
     const chain = CHAINS_CONFIG[mainnet.chainId];
@@ -35,6 +36,7 @@ export default function Dashboard() {
       return;
     }
     address = JSON.parse(address);
+    setMerchantAccount(address?.merchant_account);
     setPublicAddress(address?.address);
     let accountBalance = await provider.getBalance(address?.address);
 
@@ -91,7 +93,7 @@ export default function Dashboard() {
       var secret = CryptoJS.AES.encrypt(password, address).toString();
       window.localStorage.setItem(
         `address${addressesList?.length + 1 || 2}`,
-        JSON.stringify({ address, secretKey, secret })
+        JSON.stringify({ address, secretKey, secret, merchant_account: merchant_account === "N" ? false : true })
       );
       addressesList.push(address);
       window.localStorage.setItem(
@@ -134,6 +136,7 @@ export default function Dashboard() {
                 balance={balance}
                 fetchData={fetchData}
                 address={publicAddress}
+                merchantAccount={merchantAccount}
               />
             )}
             {activeTab === "history" && (

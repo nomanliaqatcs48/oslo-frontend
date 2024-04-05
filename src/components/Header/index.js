@@ -29,10 +29,10 @@ export default function Header({
             {page === "dashboard" &&
               selectedAddress &&
               addresses.length > 0 && (
-                <div>
+                <>
                   <Form.Select
                     className="address-select"
-                    value={selectedAddress.substring(0,20)+ "..."}
+                    value={selectedAddress}
                     onChange={(e) => {
                       const value = e.target.value;
                       setSelectedAddress(value);
@@ -49,7 +49,7 @@ export default function Header({
                       openModal={() => openModal()}
                       className="d-none d-lg-block"
                     />
-                </div>
+                </>
               )}
               <ThemeIcon
                 dispatch={dispatch}

@@ -81,7 +81,7 @@ export default function PharseSecton({
       var secret = CryptoJS.AES.encrypt(password, address).toString();
       window.localStorage.setItem(
         "address1",
-        JSON.stringify({ address, secretKey, secret })
+        JSON.stringify({ address, secretKey, secret, merchant_account: false })
       );
       window.localStorage.setItem("addressesList", JSON.stringify([address]));
       window.localStorage.setItem("selectAddress", "address1");
