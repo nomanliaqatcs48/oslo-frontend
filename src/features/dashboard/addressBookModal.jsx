@@ -118,7 +118,12 @@ export default function AddressBookModal({
           }}
           validationSchema={Yup.object({
             name: Yup.string().required("This field is required."),
-            address: Yup.string().required("This field is required."),
+            // address: Yup.string().required("This field is required."),
+            address: Yup.string().required("This field is required.")
+              .test('unique-address', 'Address already exists', function (value) {
+                const existingAddress = addressesList.length > 0 && addressesList.find(item => item.address === value);
+                return !existingAddress;
+            })
           })}
           enableReinitialize
           onSubmit={(values, { resetForm }) => {
